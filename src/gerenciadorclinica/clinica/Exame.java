@@ -1,4 +1,4 @@
-package gerenciadorClinica.Clinica;
+package gerenciadorclinica.clinica;
 
 public class Exame {
 

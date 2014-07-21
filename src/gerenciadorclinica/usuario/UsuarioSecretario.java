@@ -1,4 +1,4 @@
-package gerenciadorClinica.Usuario;
+package gerenciadorclinica.usuario;
 
 
 public class UsuarioSecretario extends Usuario {
