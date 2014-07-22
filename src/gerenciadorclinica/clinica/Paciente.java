@@ -1,5 +1,7 @@
 package gerenciadorclinica.clinica;
-import java.util.*;
+import gerenciadorclinica.Entrada;
+import java.util.Date;
+
 import extras.*;
 
 public class Paciente {
@@ -14,9 +16,37 @@ public class Paciente {
 	private Estado estado;
 	private String telefone;
 	private String email;
+	private String observacao;
+	
+	public Paciente(String nome, Genero genero, Date datanascimento, String cpf, String rg, String endereco, String cidade, Estado estado,
+			String telefone, String email, int id) {
+			super(id);
+			this.nome = nome;
+			this.genero = genero;
+			this.datanascimento = datanascimento;
+			this.cpf = cpf;
+			this.rg = rg;
+			this.endereco = endereco;
+			this.telefone = telefone;
+			this.email = email;
+			this.estado = estado;
+			this.cidade = cidade;
+			this.observacao = "";
+		}
+
+	public Paciente(String nome, Genero genero, Date datanascimento, String rg, String endereco, String cidade, Estado estado,
+				String telefone, String email, int ID){
+		this(nome, genero, datanascimento, "",rg, endereco, cidade, estado, telefone, email, ID);
+	}
+
+	public Paciente(String nome, Genero genero, Date datanascimento,String rg, String endereco, String cidade, Estado estado, 
+					String telefone, int ID){
+		this(nome, genero, datanascimento, "", rg, endereco, cidade, estado, telefone, "", ID);
+	}
 	
 	public Paciente(String nome, Genero genero, Date datanascimento, String cpf, String rg, String endereco, String cidade, Estado estado,
 					String telefone, String email) {
+		super();
 		this.nome = nome;
 		this.genero = genero;
 		this.datanascimento = datanascimento;
@@ -27,8 +57,9 @@ public class Paciente {
 		this.email = email;
 		this.estado = estado;
 		this.cidade = cidade;
+		this.observacao = "";
 	}
-	
+
 	public Paciente(String nome, Genero genero, Date datanascimento, String rg, String endereco, String cidade, Estado estado,
 					String telefone, String email){
 		this(nome, genero, datanascimento, "",rg, endereco, cidade, estado, telefone, email);
@@ -38,7 +69,15 @@ public class Paciente {
 					String telefone){
 		this(nome, genero, datanascimento, "", rg, endereco, cidade, estado, telefone, "");
 	}
+		
+	public String getObservacao() {
+		return this.observacao;
+	}
 
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}	
+	
 	public String getNome() {
 		return nome;
 	}

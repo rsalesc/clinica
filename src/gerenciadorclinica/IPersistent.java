@@ -1,5 +1,5 @@
 package gerenciadorclinica;
 
-public interface Persistent {
+public interface IPersistent {
 
 }
