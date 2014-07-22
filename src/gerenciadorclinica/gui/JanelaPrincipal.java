@@ -1,16 +1,20 @@
 package gerenciadorclinica.gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class JanelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
@@ -24,6 +28,7 @@ public class JanelaPrincipal extends JFrame {
 				try {
 					JanelaPrincipal frame = new JanelaPrincipal();
 					frame.setVisible(true);
+					LoginDialog.showDialog(frame);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,6 +42,7 @@ public class JanelaPrincipal extends JFrame {
 	public JanelaPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 323, 200);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -47,6 +53,11 @@ public class JanelaPrincipal extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnPacientes = new JButton("Pacientes");
+		btnPacientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showPacientes();
+			}
+		});
 		contentPane.add(btnPacientes);
 		
 		JButton btnConsultas = new JButton("Consultas");
@@ -56,4 +67,7 @@ public class JanelaPrincipal extends JFrame {
 		contentPane.add(btnExames);
 	}
 
+	public void showPacientes(){
+		PacientesDialog.showDialog(this);
+	}
 }
