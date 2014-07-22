@@ -1,4 +1,4 @@
-package gerenciadorClinica.Usuario;
+package gerenciadorclinica.usuario;
 
 public abstract class Usuario {
 

@@ -1,4 +1,4 @@
-package gerenciadorClinica;
+package gerenciadorclinica;
 
 public interface Persistent {
 
