@@ -4,7 +4,7 @@ import java.util.Date;
 
 import extras.*;
 
-public class Paciente {
+public class Paciente extends Entrada{
 
 	private String nome;
 	private Genero genero;
