@@ -11,6 +11,8 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -26,6 +28,7 @@ public class JanelaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					JanelaPrincipal frame = new JanelaPrincipal();
 					frame.setVisible(true);
 					LoginDialog.showDialog(frame);
@@ -40,6 +43,7 @@ public class JanelaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public JanelaPrincipal() {
+		setTitle("Gerenciador de Cl\u00EDnica");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 323, 200);
 		setResizable(false);
@@ -61,13 +65,31 @@ public class JanelaPrincipal extends JFrame {
 		contentPane.add(btnPacientes);
 		
 		JButton btnConsultas = new JButton("Consultas");
+		btnConsultas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showConsultas();
+			}
+		});
 		contentPane.add(btnConsultas);
 		
 		JButton btnExames = new JButton("Exames");
+		btnExames.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showExames();
+			}
+		});
 		contentPane.add(btnExames);
 	}
 
 	public void showPacientes(){
 		PacientesDialog.showDialog(this);
+	}
+	
+	public void showConsultas(){
+		ConsultasDialog.showDialog(this);
+	}
+	
+	public void showExames(){
+		ExamesDialog.showDialog(this);
 	}
 }

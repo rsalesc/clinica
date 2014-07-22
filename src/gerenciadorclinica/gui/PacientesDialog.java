@@ -4,11 +4,10 @@ import java.awt.Window;
 
 import javax.swing.JDialog;
 import javax.swing.JTable;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
 
+import javax.swing.JButton;
+
+@SuppressWarnings("serial")
 public class PacientesDialog extends JDialog {
 	private JTable table;
 
@@ -30,67 +29,36 @@ public class PacientesDialog extends JDialog {
 	 */
 	public PacientesDialog(Window owner) {
 		super(owner);
+		setTitle("Gerenciamento de Pacientes");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 596, 408);
-		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
-				FormFactory.PREF_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,},
-			new RowSpec[] {
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
+		getContentPane().setLayout(null);
 		
 		table = new JTable();
-		getContentPane().add(table, "9, 6, 38, 1, left, top");
+		table.setBounds(10, 79, 570, 290);
+		getContentPane().add(table);
+		
+		JButton btnEditarSelecionado = new JButton("Editar Selecionado");
+		btnEditarSelecionado.setBounds(451, 45, 129, 23);
+		getContentPane().add(btnEditarSelecionado);
+		
+		JButton btnRemoverSelecionado = new JButton("Remover Selecionado");
+		btnRemoverSelecionado.setBounds(292, 45, 149, 23);
+		getContentPane().add(btnRemoverSelecionado);
+		
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBounds(491, 11, 89, 23);
+		getContentPane().add(btnCadastrar);
+		
+		JButton btnMarcarConsulta = new JButton("Marcar Consulta");
+		btnMarcarConsulta.setBounds(370, 11, 111, 23);
+		getContentPane().add(btnMarcarConsulta);
+		
+		JButton btnSolicitarExame = new JButton("Solicitar Exame");
+		btnSolicitarExame.setBounds(243, 11, 117, 23);
+		getContentPane().add(btnSolicitarExame);
 
 	}
 }
