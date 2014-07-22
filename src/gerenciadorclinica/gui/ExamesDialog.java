@@ -3,9 +3,10 @@ package gerenciadorclinica.gui;
 import java.awt.Window;
 
 import javax.swing.JDialog;
-import java.awt.Dialog.ModalityType;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 
 @SuppressWarnings("serial")
 public class ExamesDialog extends JDialog {
@@ -43,7 +44,5 @@ public class ExamesDialog extends JDialog {
 		table = new JTable();
 		table.setBounds(10, 45, 485, 262);
 		getContentPane().add(table);
-
 	}
-
 }
