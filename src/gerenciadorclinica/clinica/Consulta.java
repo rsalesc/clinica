@@ -49,6 +49,6 @@ public class Consulta extends Entrada{
 	
 	public void desmarcarConsulta(){}
 	
-	public final static Consulta[] pesquisarConsultas(String paciente);
+	// public final static Consulta[] pesquisarConsultas(String paciente);
 	
 }
