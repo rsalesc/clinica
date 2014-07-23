@@ -58,6 +58,7 @@ public class AddExamesDialog extends JDialog {
 		}
 		{
 			pacienteField = new JTextField();
+			pacienteField.setEditable(false);
 			pacienteField.setBounds(75, 8, 276, 20);
 			contentPanel.add(pacienteField);
 			pacienteField.setColumns(10);

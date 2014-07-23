@@ -51,6 +51,11 @@ public class PacientesDialog extends JDialog {
 		getContentPane().add(btnRemoverSelecionado);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showAddPaciente();
+			}
+		});
 		btnCadastrar.setBounds(491, 11, 89, 23);
 		getContentPane().add(btnCadastrar);
 		
@@ -80,5 +85,9 @@ public class PacientesDialog extends JDialog {
 	
 	public void showAddExame(){
 		AddExamesDialog.showDialog(this);
+	}
+	
+	public void showAddPaciente(){
+		AddPacienteDialog.showDialog(this);
 	}
 }
