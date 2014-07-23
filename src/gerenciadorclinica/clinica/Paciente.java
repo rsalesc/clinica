@@ -4,9 +4,12 @@ import gerenciadorclinica.extras.*;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Paciente extends Entrada implements IPersistente{
 	
@@ -25,9 +28,9 @@ public class Paciente extends Entrada implements IPersistente{
 	private String observacao;
 	private String bairro;
 	
-	public Paciente(String nome, Genero genero, Date dataNascimento, String cpf, String rg, String endereco, String cidade, Estado estado,
-			String telefone, String email, int id, String bairro) {
-			super(id);
+	public Paciente(int ID, String nome, Genero genero, Date dataNascimento, String cpf, String rg, String endereco, String cidade, Estado estado,
+			String telefone, String email, String observacao, String bairro) {
+			super(ID);
 			this.nome = nome;
 			this.genero = genero;
 			this.dataNascimento = dataNascimento;
@@ -38,22 +41,12 @@ public class Paciente extends Entrada implements IPersistente{
 			this.email = email;
 			this.estado = estado;
 			this.cidade = cidade;
-			this.observacao = "";
+			this.observacao = observacao;
 			this.bairro = bairro;
 		}
-
-	public Paciente(String nome, Genero genero, Date dataNascimento, String rg, String endereco, String cidade, Estado estado,
-				String telefone, String email, int ID, String bairro){
-		this(nome, genero, dataNascimento, "",rg, endereco, cidade, estado, telefone, email, ID, bairro);
-	}
-
-	public Paciente(String nome, Genero genero, Date dataNascimento,String rg, String endereco, String cidade, Estado estado, 
-					String telefone, int ID, String bairro){
-		this(nome, genero, dataNascimento, "", rg, endereco, cidade, estado, telefone, "", ID, bairro);
-	}
 	
 	public Paciente(String nome, Genero genero, Date dataNascimento, String cpf, String rg, String endereco, String cidade, Estado estado,
-					String telefone, String email, String bairro) {
+					String telefone, String email, String observacao, String bairro) {
 		super();
 		this.nome = nome;
 		this.genero = genero;
@@ -65,19 +58,10 @@ public class Paciente extends Entrada implements IPersistente{
 		this.email = email;
 		this.estado = estado;
 		this.cidade = cidade;
-		this.observacao = "";
+		this.observacao = observacao;
 		this.bairro = bairro;
 	}
 
-	public Paciente(String nome, Genero genero, Date dataNascimento, String rg, String endereco, String cidade, Estado estado,
-					String telefone, String email, String bairro){
-		this(nome, genero, dataNascimento, "",rg, endereco, cidade, estado, telefone, email, bairro);
-	}
-	
-	public Paciente(String nome, Genero genero, Date dataNascimento,String rg, String endereco, String cidade, Estado estado, 
-					String telefone, String bairro){
-		this(nome, genero, dataNascimento, "", rg, endereco, cidade, estado, telefone, "", bairro);
-	}
 		
 	public String getObservacao() {
 		return this.observacao;
@@ -193,14 +177,39 @@ public class Paciente extends Entrada implements IPersistente{
 		if(genero == null || estado == null)
 			throw new NullPointerException();
 		
-		PreparedStatement ps = null;
+		PreparedStatement stm = null;
+		// Checa se não é uma entrada "repetida"
+		{
+			stm = db.getConnection().prepareStatement("select id from " + TABELA + " WHERE (cpf <> '' AND cpf = ?) OR rg = ?");
+			stm.setString(1,  cpf);
+			stm.setString(2,  rg);
+			if(stm.executeQuery().next())
+				throw new SQLException("CPF ou RG já cadastrado.");
+			
+			stm.close();
+		}
+		
+		LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
+		map.put("nome", nome);
+		map.put("genero", new Byte(genero.getGenero().getValue()));
+		map.put("dataNascimento", dataNascimento);
+		map.put("cpf", cpf);
+		map.put("rg", rg);
+		map.put("endereco", endereco);
+		map.put("cidade", cidade);
+		map.put("estado", new Byte(estado.getSelecionado()));
+		map.put("telefone", telefone);
+		map.put("email", email);
+		map.put("observacao", observacao);
+		map.put("bairro", bairro);
 		
 		if(isNovaEntrada()){
-			
+			stm = db.geraInsertStatement(Paciente.TABELA, map);
+			stm.executeUpdate();
+			this.setID(db.getUltimoInsertID(Paciente.TABELA));
 		}else{
 			
 		}
-
 	}
 
 	@Override

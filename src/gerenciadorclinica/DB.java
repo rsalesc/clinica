@@ -5,9 +5,11 @@ import gerenciadorclinica.extras.Utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -50,7 +52,7 @@ public class DB implements Cloneable {
 	}
 	
 	public void conecta() throws SQLException, ClassNotFoundException {
-		Class.forName("org.sqlite.jdbc");
+		Class.forName("org.sqlite.JDBC");
 		connection = DriverManager.getConnection(connString);	
 	}
 
@@ -62,16 +64,16 @@ public class DB implements Cloneable {
 		}
 	}
 	
-	public static Statement resolvePreparedStatement(PreparedStatement stm, Object[] set) throws SQLException{
-		for(int i = 1; i <= set.length; i++){
+	public static PreparedStatement resolvePreparedStatement(PreparedStatement stm, Object[] set) throws SQLException{
+		for(int i = 0; i < set.length; i++){
 			if(set[i] instanceof String){
-				stm.setString(i, (String)set[i]);
-			}else if(set[i] instanceof java.sql.Date){
-				stm.setDate(i, (java.sql.Date)set[i]);
+				stm.setString(i+1, (String)set[i]);
+			}else if(set[i] instanceof Date){
+				stm.setLong(i+1, ((Date)set[i]).getTime()/1000L);
 			}else if(set[i] instanceof Integer){
-				stm.setInt(i,  ((Integer)set[i]).intValue());
+				stm.setInt(i+1,  ((Integer)set[i]).intValue());
 			}else if(set[i] instanceof Byte){
-				stm.setByte(i, ((Byte)set[i]).byteValue());
+				stm.setByte(i+1, ((Byte)set[i]).byteValue());
 			}else{
 				throw new SQLException("Tipo invalido");
 			}
@@ -79,10 +81,18 @@ public class DB implements Cloneable {
 		return stm;
 	}
 	
-	public Statement geraInsertStatement(String tabela, LinkedHashMap<String, Object> map) throws SQLException {
+	public PreparedStatement geraInsertStatement(String tabela, LinkedHashMap<String, Object> map) throws SQLException {
 		String concatKeys = Utils.join(",", map.keySet().toArray());
 		String concatParams = Utils.join(",", "?", map.size());
 		return DB.resolvePreparedStatement(connection.prepareStatement("insert into " + tabela + " (" + concatKeys + ") values (" + concatParams + ")"), map.values().toArray());
+	}
+	
+	public int getUltimoInsertID(String tabela) throws SQLException{
+		checkConnection();
+		ResultSet rs = connection.createStatement().executeQuery("SELECT last_insert_rowid() FROM " + tabela);
+		if(rs.next())
+			return rs.getInt(1);
+		throw new SQLException();
 	}
 	
 	public DB clone(){
