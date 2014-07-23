@@ -2,23 +2,40 @@ package gerenciadorclinica.extras;
 
 public class Genero {
 
-	private byte genero;
+	public enum GeneroEnum{
+		MASCULINO((byte)0), FEMININO((byte)1);
+		private byte value;
+		
+		private GeneroEnum(byte gen){
+			this.setValue(gen);
+		}
+		
+		public byte getValue() {
+			return value;
+		}
+
+		public void setValue(byte gen) {
+			this.value = gen;
+		}
+	}
 	
-	public Genero(byte genero) {
+	private GeneroEnum genero;
+	
+	public Genero(GeneroEnum genero) {
 		this.genero = genero;
 	}
 
-	public byte getGenero() {
+	public GeneroEnum getGenero() {
 		return genero;
 	}
 
-	public void setGenero(byte genero) {
+	public void setGenero(GeneroEnum genero) {
 		this.genero = genero;
 	}
 
 	@Override
 	public String toString() {
-		if (this.genero == 0)
+		if (this.genero.getValue() == 0)
 			return "Masculino";
 		return "Feminino";
 	}

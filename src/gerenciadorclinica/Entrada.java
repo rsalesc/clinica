@@ -4,11 +4,11 @@ import java.util.Date;
 public class Entrada {
 
 	private int ID;
-	private Date datacriacao;
+	private Date dataCriacao;
 	
 	public Entrada(int id) {
 		this.ID = id;
-		this.datacriacao = new Date();
+		this.dataCriacao = new Date();
 	}
 	
 	public Entrada() {
@@ -19,16 +19,16 @@ public class Entrada {
 		return ID;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 
-	public Date getDatacriacao() {
-		return datacriacao;
+	public Date getDataCriacao() {
+		return dataCriacao;
 	}
 
-	public void setDatacriacao(Date datacriacao) {
-		this.datacriacao = datacriacao;
+	public void setDatacriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
 	}
 	
 }
