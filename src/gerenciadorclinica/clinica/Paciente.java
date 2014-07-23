@@ -2,13 +2,14 @@ package gerenciadorclinica.clinica;
 import gerenciadorclinica.Entrada;
 import gerenciadorclinica.extras.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Paciente extends Entrada{
 
 	private String nome;
 	private Genero genero;
-	private Date datanascimento;
+	private Date dataNascimento;
 	private String cpf;
 	private String rg;
 	private String endereco;
@@ -19,12 +20,12 @@ public class Paciente extends Entrada{
 	private String observacao;
 	private String bairro;
 	
-	public Paciente(String nome, Genero genero, Date datanascimento, String cpf, String rg, String endereco, String cidade, Estado estado,
+	public Paciente(String nome, Genero genero, Date dataNascimento, String cpf, String rg, String endereco, String cidade, Estado estado,
 			String telefone, String email, int id, String bairro) {
 			super(id);
 			this.nome = nome;
 			this.genero = genero;
-			this.datanascimento = datanascimento;
+			this.dataNascimento = dataNascimento;
 			this.cpf = cpf;
 			this.rg = rg;
 			this.endereco = endereco;
@@ -36,22 +37,22 @@ public class Paciente extends Entrada{
 			this.bairro = bairro;
 		}
 
-	public Paciente(String nome, Genero genero, Date datanascimento, String rg, String endereco, String cidade, Estado estado,
+	public Paciente(String nome, Genero genero, Date dataNascimento, String rg, String endereco, String cidade, Estado estado,
 				String telefone, String email, int ID, String bairro){
-		this(nome, genero, datanascimento, "",rg, endereco, cidade, estado, telefone, email, ID, bairro);
+		this(nome, genero, dataNascimento, "",rg, endereco, cidade, estado, telefone, email, ID, bairro);
 	}
 
-	public Paciente(String nome, Genero genero, Date datanascimento,String rg, String endereco, String cidade, Estado estado, 
+	public Paciente(String nome, Genero genero, Date dataNascimento,String rg, String endereco, String cidade, Estado estado, 
 					String telefone, int ID, String bairro){
-		this(nome, genero, datanascimento, "", rg, endereco, cidade, estado, telefone, "", ID, bairro);
+		this(nome, genero, dataNascimento, "", rg, endereco, cidade, estado, telefone, "", ID, bairro);
 	}
 	
-	public Paciente(String nome, Genero genero, Date datanascimento, String cpf, String rg, String endereco, String cidade, Estado estado,
+	public Paciente(String nome, Genero genero, Date dataNascimento, String cpf, String rg, String endereco, String cidade, Estado estado,
 					String telefone, String email, String bairro) {
 		super();
 		this.nome = nome;
 		this.genero = genero;
-		this.datanascimento = datanascimento;
+		this.dataNascimento = dataNascimento;
 		this.cpf = cpf;
 		this.rg = rg;
 		this.endereco = endereco;
@@ -63,14 +64,14 @@ public class Paciente extends Entrada{
 		this.bairro = bairro;
 	}
 
-	public Paciente(String nome, Genero genero, Date datanascimento, String rg, String endereco, String cidade, Estado estado,
+	public Paciente(String nome, Genero genero, Date dataNascimento, String rg, String endereco, String cidade, Estado estado,
 					String telefone, String email, String bairro){
-		this(nome, genero, datanascimento, "",rg, endereco, cidade, estado, telefone, email, bairro);
+		this(nome, genero, dataNascimento, "",rg, endereco, cidade, estado, telefone, email, bairro);
 	}
 	
-	public Paciente(String nome, Genero genero, Date datanascimento,String rg, String endereco, String cidade, Estado estado, 
+	public Paciente(String nome, Genero genero, Date dataNascimento,String rg, String endereco, String cidade, Estado estado, 
 					String telefone, String bairro){
-		this(nome, genero, datanascimento, "", rg, endereco, cidade, estado, telefone, "", bairro);
+		this(nome, genero, dataNascimento, "", rg, endereco, cidade, estado, telefone, "", bairro);
 	}
 		
 	public String getObservacao() {
@@ -98,11 +99,11 @@ public class Paciente extends Entrada{
 	}
 
 	public Date getDatanascimento() {
-		return datanascimento;
+		return dataNascimento;
 	}
 
-	public void setDatanascimento(Date datanascimento) {
-		this.datanascimento = datanascimento;
+	public void setDatanascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String getCpf() {
@@ -161,4 +162,19 @@ public class Paciente extends Entrada{
 		this.email = email;
 	}
 	
+	public void setBairro(String bairro){
+		this.bairro = bairro;
+	}
+	
+	public String getBairro(){
+		return this.bairro;
+	}
+	
+	public int getIdade(){
+		SimpleDateFormat estiloDataAno = new SimpleDateFormat("YYYY");
+		Date dataDeHoje = new Date();
+		int anoNascimento = Integer.parseInt(estiloDataAno.format(dataDeHoje));
+		int anoAtual = Integer.parseInt(estiloDataAno.format(this.dataNascimento));
+		return anoAtual - anoNascimento;			
+	}
 }
