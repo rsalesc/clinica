@@ -1,7 +1,7 @@
 package gerenciadorclinica;
 import java.util.Date;
 
-public class Entrada {
+public class Entrada{
 
 	private int ID;
 	private Date dataCriacao;
@@ -29,6 +29,10 @@ public class Entrada {
 
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+	
+	public boolean isNovaEntrada(){
+		return (getID() == 0);
 	}
 	
 }

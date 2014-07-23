@@ -35,7 +35,7 @@ public class Genero {
 
 	@Override
 	public String toString() {
-		if (this.genero.getValue() == 0)
+		if (this.genero == GeneroEnum.MASCULINO)
 			return "Masculino";
 		return "Feminino";
 	}

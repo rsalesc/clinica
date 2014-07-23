@@ -1,12 +1,17 @@
 package gerenciadorclinica.clinica;
-import gerenciadorclinica.Entrada;
+import gerenciadorclinica.*;
 import gerenciadorclinica.extras.*;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Paciente extends Entrada{
-
+public class Paciente extends Entrada implements IPersistente{
+	
+	private final static String TABELA = "pacientes";
+	
 	private String nome;
 	private Genero genero;
 	private Date dataNascimento;
@@ -179,5 +184,28 @@ public class Paciente extends Entrada{
 		if(calendarToday.get(Calendar.DAY_OF_YEAR) < calendarNascimento.get(Calendar.DAY_OF_YEAR) && idade > 0)
 			idade--;
 		return idade;
+	}
+
+	@Override
+	public void salvar(DB db) throws SQLException, NullPointerException {
+		db.checkConnection();
+		
+		if(genero == null || estado == null)
+			throw new NullPointerException();
+		
+		PreparedStatement ps = null;
+		
+		if(isNovaEntrada()){
+			
+		}else{
+			
+		}
+
+	}
+
+	@Override
+	public void carregar(DB db) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }
