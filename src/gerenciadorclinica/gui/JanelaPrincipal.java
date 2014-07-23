@@ -22,24 +22,6 @@ public class JanelaPrincipal extends JFrame {
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					JanelaPrincipal frame = new JanelaPrincipal();
-					frame.setVisible(true);
-					LoginDialog.showDialog(frame);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public JanelaPrincipal() {

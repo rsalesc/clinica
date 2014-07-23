@@ -2,7 +2,6 @@ package gerenciadorclinica.clinica;
 import gerenciadorclinica.Entrada;
 import gerenciadorclinica.extras.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 

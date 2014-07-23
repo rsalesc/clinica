@@ -27,7 +27,7 @@ public class Entrada {
 		return dataCriacao;
 	}
 
-	public void setDatacriacao(Date dataCriacao) {
+	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 	
