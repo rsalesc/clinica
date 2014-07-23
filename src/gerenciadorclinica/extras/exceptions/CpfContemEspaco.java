@@ -1,4 +1,4 @@
-package gerenciadorclinica.extras;
+package gerenciadorclinica.extras.exceptions;
 
 @SuppressWarnings("serial")
 public class CpfContemEspaco extends Exception {

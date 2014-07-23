@@ -1,5 +1,7 @@
 package gerenciadorclinica.extras;
 
+import gerenciadorclinica.extras.exceptions.*;
+
 public class Validacao {
 
 	public static boolean validaCpf(String CPF) throws Exception{
@@ -24,7 +26,7 @@ public class Validacao {
 				throw new RgTamanhoErrado();
 			if(RG.contains(" "))
 				throw new RgContemEspaco();
-			if((Long.parseLong(RG) < 1000000)||(Long.parseLong(RG) < 100000))
+			if(!(Long.parseLong(RG) > 100000000))
 				throw new RgContemLetra();
 		}
 		catch(Exception e){
@@ -34,17 +36,17 @@ public class Validacao {
 		return true;
 	}
 	
-	public static boolean validaEmail(){
-		
+	public static void validaEmail(){
+		// Faz esse ai blz
 	}
 	
 	public static boolean validaTelefone(String telefone){
 		try{
-			if(telefone.length() != 11)
+			if(telefone.length() != 10)
 				throw new TelefoneTamanhoErrado();
 			if(telefone.contains(" "))
 				throw new TelefoneContemEspaco();
-			if((Long.parseLong(telefone) < 1000000)||(Long.parseLong(telefone) < 100000))
+			if(!(Long.parseLong(telefone) > 1000000000))
 				throw new TelefoneContemLetra();
 		}
 		catch(Exception e){
