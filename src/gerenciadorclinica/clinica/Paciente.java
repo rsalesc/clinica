@@ -17,9 +17,10 @@ public class Paciente extends Entrada{
 	private String telefone;
 	private String email;
 	private String observacao;
+	private String bairro;
 	
 	public Paciente(String nome, Genero genero, Date datanascimento, String cpf, String rg, String endereco, String cidade, Estado estado,
-			String telefone, String email, int id) {
+			String telefone, String email, int id, String bairro) {
 			super(id);
 			this.nome = nome;
 			this.genero = genero;
@@ -32,20 +33,21 @@ public class Paciente extends Entrada{
 			this.estado = estado;
 			this.cidade = cidade;
 			this.observacao = "";
+			this.bairro = bairro;
 		}
 
 	public Paciente(String nome, Genero genero, Date datanascimento, String rg, String endereco, String cidade, Estado estado,
-				String telefone, String email, int ID){
-		this(nome, genero, datanascimento, "",rg, endereco, cidade, estado, telefone, email, ID);
+				String telefone, String email, int ID, String bairro){
+		this(nome, genero, datanascimento, "",rg, endereco, cidade, estado, telefone, email, ID, bairro);
 	}
 
 	public Paciente(String nome, Genero genero, Date datanascimento,String rg, String endereco, String cidade, Estado estado, 
-					String telefone, int ID){
-		this(nome, genero, datanascimento, "", rg, endereco, cidade, estado, telefone, "", ID);
+					String telefone, int ID, String bairro){
+		this(nome, genero, datanascimento, "", rg, endereco, cidade, estado, telefone, "", ID, bairro);
 	}
 	
 	public Paciente(String nome, Genero genero, Date datanascimento, String cpf, String rg, String endereco, String cidade, Estado estado,
-					String telefone, String email) {
+					String telefone, String email, String bairro) {
 		super();
 		this.nome = nome;
 		this.genero = genero;
@@ -58,16 +60,17 @@ public class Paciente extends Entrada{
 		this.estado = estado;
 		this.cidade = cidade;
 		this.observacao = "";
+		this.bairro = bairro;
 	}
 
 	public Paciente(String nome, Genero genero, Date datanascimento, String rg, String endereco, String cidade, Estado estado,
-					String telefone, String email){
-		this(nome, genero, datanascimento, "",rg, endereco, cidade, estado, telefone, email);
+					String telefone, String email, String bairro){
+		this(nome, genero, datanascimento, "",rg, endereco, cidade, estado, telefone, email, bairro);
 	}
 	
 	public Paciente(String nome, Genero genero, Date datanascimento,String rg, String endereco, String cidade, Estado estado, 
-					String telefone){
-		this(nome, genero, datanascimento, "", rg, endereco, cidade, estado, telefone, "");
+					String telefone, String bairro){
+		this(nome, genero, datanascimento, "", rg, endereco, cidade, estado, telefone, "", bairro);
 	}
 		
 	public String getObservacao() {
