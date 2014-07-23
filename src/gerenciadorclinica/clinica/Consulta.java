@@ -3,20 +3,20 @@ import gerenciadorclinica.Entrada;
 import java.util.Date;
 
 public class Consulta extends Entrada{
-	private Date datamarcada;
+	private Date dataMarcada;
 	private Paciente paciente;
 	private String observacao;
 	
-	public Consulta(Date datamarcada, Paciente paciente, int ID) {
+	public Consulta(Date dataMarcada, Paciente paciente, int ID) {
 		super(ID);
-		this.datamarcada = datamarcada;
+		this.dataMarcada = dataMarcada;
 		this.paciente = paciente;
 		this.observacao = "";
 	}
 	
-	public Consulta(Date datamarcada, Paciente paciente) {
+	public Consulta(Date dataMarcada, Paciente paciente) {
 		super();
-		this.datamarcada = datamarcada;
+		this.dataMarcada = dataMarcada;
 		this.paciente = paciente;
 		this.observacao = "";
 	}
@@ -29,12 +29,12 @@ public class Consulta extends Entrada{
 		this.observacao = observacao;
 	}
 	
-	public Date getDatamarcada() {
-		return datamarcada;
+	public Date getdataMarcada() {
+		return dataMarcada;
 	}
 
-	public void setDatamarcada(Date datamarcada) {
-		this.datamarcada = datamarcada;
+	public void setdataMarcada(Date dataMarcada) {
+		this.dataMarcada = dataMarcada;
 	}
 
 	public Paciente getPaciente() {

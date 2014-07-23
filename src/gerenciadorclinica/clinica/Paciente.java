@@ -3,6 +3,7 @@ import gerenciadorclinica.Entrada;
 import gerenciadorclinica.extras.*;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Paciente extends Entrada{
@@ -171,10 +172,13 @@ public class Paciente extends Entrada{
 	}
 	
 	public int getIdade(){
-		SimpleDateFormat estiloDataAno = new SimpleDateFormat("YYYY");
-		Date dataDeHoje = new Date();
-		int anoNascimento = Integer.parseInt(estiloDataAno.format(dataDeHoje));
-		int anoAtual = Integer.parseInt(estiloDataAno.format(this.dataNascimento));
-		return anoAtual - anoNascimento;			
+		Calendar calendarToday = Calendar.getInstance();
+		Calendar calendarNascimento = Calendar.getInstance();
+		calendarToday.setTime(new Date());
+		calendarNascimento.setTime(dataNascimento);
+		int idade = calendarToday.get(Calendar.YEAR) - calendarNascimento.get(Calendar.YEAR);
+		if(calendarToday.get(Calendar.DAY_OF_YEAR) < calendarNascimento.get(Calendar.DAY_OF_YEAR) && idade > 0)
+			idade--;
+		return idade;
 	}
 }
