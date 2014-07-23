@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="extras.Genero" project="GerenciadorClinica" 
-    file="/GerenciadorClinica/src/extras/Genero.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="gerenciadorclinica.extras.Genero" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/Genero.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="172" y="1094"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -82,25 +82,25 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="12">    
-    <end type="SOURCE" refId="4" navigable="false">      
+    <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="13" name="paciente"/>      
       <multiplicity id="14" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="15">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="16" name="paciente"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
+  <generalization id="15">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="16">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="17" name="paciente"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="18">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
   <association id="19">    
     <end type="SOURCE" refId="6" navigable="false">      
       <attribute id="20" name="genero"/>      
@@ -110,7 +110,7 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <generalization id="22">    
-    <end type="SOURCE" refId="5"/>    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

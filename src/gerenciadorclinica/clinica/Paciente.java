@@ -1,8 +1,8 @@
 package gerenciadorclinica.clinica;
 import gerenciadorclinica.Entrada;
-import java.util.Date;
+import gerenciadorclinica.extras.*;
 
-import extras.*;
+import java.util.Date;
 
 public class Paciente extends Entrada{
 
