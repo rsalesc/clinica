@@ -1,4 +1,4 @@
-package gerenciadorclinica.gui;
+package gerenciadorclinica.gui.components;
 
 import java.util.Date;
 

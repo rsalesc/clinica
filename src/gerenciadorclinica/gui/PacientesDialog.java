@@ -6,6 +6,8 @@ import javax.swing.JDialog;
 import javax.swing.JTable;
 
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class PacientesDialog extends JDialog {
@@ -53,12 +55,30 @@ public class PacientesDialog extends JDialog {
 		getContentPane().add(btnCadastrar);
 		
 		JButton btnMarcarConsulta = new JButton("Marcar Consulta");
+		btnMarcarConsulta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showAddConsulta();
+			}
+		});
 		btnMarcarConsulta.setBounds(370, 11, 111, 23);
 		getContentPane().add(btnMarcarConsulta);
 		
 		JButton btnSolicitarExame = new JButton("Solicitar Exame");
+		btnSolicitarExame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showAddExame();
+			}
+		});
 		btnSolicitarExame.setBounds(243, 11, 117, 23);
 		getContentPane().add(btnSolicitarExame);
 
+	}
+	
+	public void showAddConsulta(){
+		AddConsultaDialog.showDialog(this);
+	}
+	
+	public void showAddExame(){
+		AddExamesDialog.showDialog(this);
 	}
 }

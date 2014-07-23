@@ -5,8 +5,6 @@ import java.awt.Window;
 import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
-import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 
 @SuppressWarnings("serial")
 public class ExamesDialog extends JDialog {
