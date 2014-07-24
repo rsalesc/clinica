@@ -17,7 +17,7 @@ import java.util.Vector;
 
 public class Paciente extends Entrada implements IPersistente{
 	
-	private final static String TABELA = "pacientes";
+	public final static String TABELA = "pacientes";
 	
 	private String nome;
 	private Genero genero;
@@ -237,6 +237,15 @@ public class Paciente extends Entrada implements IPersistente{
 			throw new SQLException("[Erro ao carregar] Entrada não encontrada.");
 		
 		preencheEntrada(db, rs);		
+	}
+	
+	@Override
+	public void remover(DB db) throws SQLException{
+		if(db.getConnection().createStatement().executeUpdate("delete from " + TABELA + " WHERE id = " + getID()) == 0)
+			throw new SQLException("[Erro ao remover] Entrada não encontrada.");
+		
+		db.getConnection().createStatement().executeUpdate("delete from " + Consulta.TABELA + " WHERE pacienteId = " + getID());
+		db.getConnection().createStatement().executeUpdate("delete from " + Exame.TABELA + " WHERE pacienteId = " + getID());
 	}
 	
 	@Override

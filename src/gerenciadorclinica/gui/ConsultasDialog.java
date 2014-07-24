@@ -2,8 +2,10 @@ package gerenciadorclinica.gui;
 
 import gerenciadorclinica.App;
 import gerenciadorclinica.clinica.Consulta;
+import gerenciadorclinica.clinica.Exame;
 import gerenciadorclinica.clinica.Paciente;
 import gerenciadorclinica.gui.components.ConsultaTableModel;
+import gerenciadorclinica.gui.components.ExameTableModel;
 import gerenciadorclinica.gui.components.PacienteTableModel;
 
 import java.awt.Dimension;
@@ -20,6 +22,9 @@ import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class ConsultasDialog extends JDialog {
@@ -46,6 +51,7 @@ public class ConsultasDialog extends JDialog {
 	 */
 	public ConsultasDialog(Window owner, Paciente p) {
 		super(owner);
+		Window self = this;
 		setTitle("Gerenciamento de Consultas");
 		this.paciente = p;
 		if(paciente != null) setTitle("Consultas do paciente " + paciente.getNome());
@@ -56,6 +62,16 @@ public class ConsultasDialog extends JDialog {
 		getContentPane().setLayout(null);
 		
 		JButton btnDesmarcarSelecionada = new JButton("Desmarcar Selecionada");
+		btnDesmarcarSelecionada.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					removeSelecionado();
+					atualizarConsultas();
+				} catch (Exception e) {
+					App.showMsgBox(self, e.getMessage());
+				}
+			}
+		});
 		btnDesmarcarSelecionada.setBounds(376, 11, 143, 23);
 		getContentPane().add(btnDesmarcarSelecionada);
 		
@@ -74,7 +90,6 @@ public class ConsultasDialog extends JDialog {
 		label.setBounds(10, 15, 163, 14);
 		getContentPane().add(label);
 		
-		Window self = this;
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -104,5 +119,15 @@ public class ConsultasDialog extends JDialog {
 		ArrayList<Consulta> consultas = this.paciente == null ? Consulta.listar(App.db) : Consulta.listar(App.db, "pacienteId = " + this.paciente.getID());
 		ConsultaTableModel model = new ConsultaTableModel(consultas);
 		table.setModel(model);
+	}
+	
+	public void removeSelecionado() throws Exception{
+		if(table.getSelectedRow() >= 0){
+			if(App.showConfirm(this)){
+				ConsultaTableModel model = (ConsultaTableModel)table.getModel();
+				Consulta c = model.getRow(table.getSelectedRow());
+				c.remover(App.db);
+			}
+		}
 	}
 }

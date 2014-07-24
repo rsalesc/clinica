@@ -8,6 +8,7 @@ import gerenciadorclinica.extras.Genero;
 import gerenciadorclinica.extras.Genero.GeneroEnum;
 import gerenciadorclinica.gui.JanelaPrincipal;
 import gerenciadorclinica.gui.LoginDialog;
+import gerenciadorclinica.usuario.Usuario;
 
 import java.awt.EventQueue;
 import java.awt.Window;
@@ -25,6 +26,7 @@ public class App {
 	
 	public static final DB db = new DB("jdbc:sqlite:clinica.db");
 	public static final DateFormat dataFormato = new SimpleDateFormat("dd/MM/yyyy");
+	public static Usuario usuario = null;
 	
 	/**
 	 * Executa a aplicação
@@ -34,27 +36,11 @@ public class App {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					// DB TESTE
-					/*
-					{
-						DB data = db.clone();
-						Consulta c = new Consulta(1);
-						try{
-							data.conecta();
-							c.carregar(data);
-							Paciente p = c.getPaciente();
-							System.out.println(c.getObservacao());
-							System.out.println(p.getNome());
-						}catch(SQLException e){
-							System.out.println(e.getMessage());
-						} finally{
-							data.desconecta();
-						}
-					}*/
 					App.db.conecta();
 					JanelaPrincipal frame = new JanelaPrincipal();
 					frame.setVisible(true);
 					LoginDialog.showDialog(frame);
+					frame.atualizaUsuario();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -64,5 +50,9 @@ public class App {
 	
 	public static void showMsgBox(Window owner, String msg){
 		JOptionPane.showMessageDialog(owner, msg);
+	}
+	
+	public static boolean showConfirm(Window owner){
+		return (JOptionPane.showConfirmDialog(owner,  "Deseja confirmar a ação?", "Confirme a ação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
 	}
 }

@@ -2,7 +2,9 @@ package gerenciadorclinica.gui;
 
 import gerenciadorclinica.App;
 import gerenciadorclinica.DB;
+import gerenciadorclinica.clinica.Consulta;
 import gerenciadorclinica.clinica.Paciente;
+import gerenciadorclinica.gui.components.ConsultaTableModel;
 import gerenciadorclinica.gui.components.PacienteTableModel;
 
 import java.awt.Window;
@@ -14,13 +16,16 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 
@@ -54,9 +59,19 @@ public class PacientesDialog extends JDialog {
 		setBounds(100, 100, 596, 408);
 		getContentPane().setLayout(null);
 		
-		PacientesDialog self = this;
+		Window self = this;
 		
 		JButton btnRemoverSelecionado = new JButton("Remover Selecionado");
+		btnRemoverSelecionado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					removeSelecionado();
+					atualizarPacientes();
+				} catch (Exception e1) {
+					App.showMsgBox(self, e1.getMessage());
+				}
+			}
+		});
 		btnRemoverSelecionado.setBounds(431, 45, 149, 23);
 		getContentPane().add(btnRemoverSelecionado);
 		
@@ -170,5 +185,15 @@ public class PacientesDialog extends JDialog {
 	public void atualizarPacientes() throws SQLException{
 		PacienteTableModel model = new PacienteTableModel(Paciente.listar(App.db));
 		table.setModel(model);
+	}
+	
+	public void removeSelecionado() throws Exception{
+		if(table.getSelectedRow() >= 0){
+			if(App.showConfirm(this)){
+				PacienteTableModel model = (PacienteTableModel)table.getModel();
+				Paciente p = model.getRow(table.getSelectedRow());
+				p.remover(App.db);
+			}
+		}
 	}
 }

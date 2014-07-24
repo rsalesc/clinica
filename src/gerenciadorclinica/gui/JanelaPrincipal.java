@@ -1,5 +1,7 @@
 package gerenciadorclinica.gui;
 
+import gerenciadorclinica.App;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -20,6 +22,7 @@ import java.awt.event.ActionEvent;
 public class JanelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private JLabel authLbl;
 
 	/**
 	 * Create the frame.
@@ -34,9 +37,9 @@ public class JanelaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(4, 0, 0, 0));
 		
-		JLabel lblNewLabel = new JLabel("Aguardando autentica\u00E7\u00E3o...");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblNewLabel);
+		authLbl = new JLabel("Aguardando autentica\u00E7\u00E3o...");
+		authLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(authLbl);
 		
 		JButton btnPacientes = new JButton("Pacientes");
 		btnPacientes.addActionListener(new ActionListener() {
@@ -73,5 +76,9 @@ public class JanelaPrincipal extends JFrame {
 	
 	public void showExames(){
 		ExamesDialog.showDialog(this);
+	}
+	
+	public void atualizaUsuario(){
+		if(App.usuario != null) authLbl.setText("Bem-vindo, " + App.usuario.getNome() + ".");
 	}
 }

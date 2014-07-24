@@ -13,48 +13,51 @@ public abstract class Usuario extends Entrada {
 	private final static String TABELA = "usuarios";
 	
 	private String usuario;
-	@SuppressWarnings("unused")
-	private int level;
+	private String nome;
 	
-	public Usuario(String usuario, int level, int Id) {
+	public Usuario(int Id) {
 		super(Id);
-		this.usuario = usuario;
-		this.level = level;
 	}
 	
-	public Usuario(String usuario, int level){
-		super();
-		this.usuario = usuario;
-		this.level= level;
-	}
-	
-	public Usuario(int Id){
+	public Usuario(int Id, String usuario) {
 		super(Id);
+		this.usuario = usuario;
 	}
 	
 	public void salvar(){}
 	
-	public static Usuario getUsuarioAutenticado(DB db, String usuario, String senha) throws UsuarioInvalidoException, SQLException {
+	public static Usuario getUsuarioAutenticado(DB db, String usuario, String senha) throws SQLException {
 		PreparedStatement stm = null;
 		
-		String query = "select id from " + Usuario.TABELA + " WHERE usuario = ? and senha = ?";
+		String query = "select * from " + Usuario.TABELA + " WHERE usuario = ? and senha = ?";
 		stm = db.getConnection().prepareStatement(query);
 		stm.setString(1,  usuario);
 		stm.setString(2, usuario);
 		
 		ResultSet rs = stm.executeQuery();
 		if(!stm.executeQuery().next())
-			throw new UsuarioInvalidoException();
+			return null;
 		
-		rs.getString("usuario");
-		rs.getString("senha");
+		int id = rs.getInt("id");
 		int level = rs.getInt("nivel");
 		
-		return (level == 1) ? new UsuarioMedico(usuario) : new UsuarioSecretario(usuario);
+		Usuario u = (level == 1) ? new UsuarioMedico(id, usuario) : new UsuarioSecretario(id, usuario); 
+		u.setNome(rs.getString("nome"));
+		u.setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
+		
+		return u;
 	}
 	
 	public String getUsuario(){
 		return this.usuario;
+	}
+	
+	public String getNome(){
+		return this.nome;
+	}
+	
+	public void setNome(String nome){
+		this.nome = nome;
 	}
 	
 	public abstract int getLevel();

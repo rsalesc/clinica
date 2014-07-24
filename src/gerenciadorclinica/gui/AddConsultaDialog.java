@@ -26,6 +26,7 @@ import java.util.Date;
 import javax.swing.SpringLayout;
 
 import gerenciadorclinica.gui.components.ScrollableTextArea;
+import gerenciadorclinica.usuario.UsuarioSecretario;
 
 @SuppressWarnings("serial")
 public class AddConsultaDialog extends JDialog {
@@ -103,6 +104,8 @@ public class AddConsultaDialog extends JDialog {
 		obsField = new ScrollableTextArea();
 		obsField.setBounds(66, 75, 255, 119);
 		contentPanel.add(obsField);
+		if(App.usuario instanceof UsuarioSecretario)
+			obsField.getTextArea().setEnabled(false);
 		
 		Window self = this;
 		{

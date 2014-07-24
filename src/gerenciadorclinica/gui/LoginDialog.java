@@ -1,5 +1,9 @@
 package gerenciadorclinica.gui;
 
+import gerenciadorclinica.App;
+import gerenciadorclinica.extras.exceptions.FormInvalidoException;
+import gerenciadorclinica.usuario.Usuario;
+
 import java.awt.Window;
 
 import javax.swing.JDialog;
@@ -22,6 +26,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 @SuppressWarnings("serial")
 public class LoginDialog extends JDialog {
@@ -98,15 +103,26 @@ public class LoginDialog extends JDialog {
 		getContentPane().add(passwordField, "6, 6, fill, default");
 		
 		JButton btnEntrar = new JButton("Entrar");
+		
+		Window self = this;
+		
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				doLogin();
+				try {
+					doLogin();
+				} catch (Exception e) {
+					App.showMsgBox(self, e.getMessage());
+				}
 			}
 		});
 		getContentPane().add(btnEntrar, "6, 8");
 	}
 
-	public void doLogin(){
+	public void doLogin() throws Exception{
+		String password = new String(passwordField.getPassword());
+		if(loginField.getText().isEmpty() || password.isEmpty())
+			throw new FormInvalidoException("Os campos obrigatórios não foram preenchidos.");
+		App.usuario = Usuario.getUsuarioAutenticado(App.db, loginField.getText(), password);
 		wasLoginHit = true;
 		dispose();
 	}

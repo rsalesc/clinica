@@ -1,6 +1,7 @@
 package gerenciadorclinica.clinica;
 import gerenciadorclinica.DB;
 import gerenciadorclinica.Entrada;
+import gerenciadorclinica.IPersistente;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,13 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-public class Exame extends Entrada {
+public class Exame extends Entrada implements IPersistente {
 
 	private String exame;
 	private Paciente paciente;
 	private String observacao;
 	
-	private final static String TABELA = "exames";
+	public final static String TABELA = "exames";
 	
 	public Exame(int ID){
 		super(ID);
@@ -122,5 +123,11 @@ public class Exame extends Entrada {
 	}
 	
 	public void vincularResultadoExame(){ }
+
+	@Override
+	public void remover(DB db) throws Exception {
+		if(db.getConnection().createStatement().executeUpdate("delete from " + TABELA + " WHERE id = " + getID()) == 0)
+			throw new SQLException("[Erro ao remover] Entrada não encontrada.");	
+	}
 
 }

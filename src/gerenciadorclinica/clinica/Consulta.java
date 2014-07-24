@@ -1,6 +1,7 @@
 package gerenciadorclinica.clinica;
 import gerenciadorclinica.DB;
 import gerenciadorclinica.Entrada;
+import gerenciadorclinica.IPersistente;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,12 +10,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
-public class Consulta extends Entrada{
+public class Consulta extends Entrada implements IPersistente{
 	private Date dataMarcada;
 	private Paciente paciente;
 	private String observacao;
 	
-	private final static String TABELA = "consultas";
+	public final static String TABELA = "consultas";
 	
 	public Consulta(int ID){
 		super(ID);
@@ -125,6 +126,12 @@ public class Consulta extends Entrada{
 	
 	public static ArrayList<Consulta> listar(DB db) throws Exception{
 		return listar(db, null);
+	}
+
+	@Override
+	public void remover(DB db) throws Exception {
+		if(db.getConnection().createStatement().executeUpdate("delete from " + TABELA + " WHERE id = " + getID()) == 0)
+			throw new SQLException("[Erro ao remover] Entrada não encontrada.");
 	}
 	
 }

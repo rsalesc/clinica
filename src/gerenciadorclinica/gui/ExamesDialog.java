@@ -20,6 +20,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 @SuppressWarnings("serial")
 public class ExamesDialog extends JDialog {
 	private JTable table;
@@ -47,6 +50,7 @@ public class ExamesDialog extends JDialog {
 	 */
 	public ExamesDialog(Window owner, Paciente p) {
 		super(owner);
+		Window self = this;
 		setTitle("Gerenciamento de Exames");
 		this.paciente = p;
 		if(this.paciente != null) setTitle("Exames do paciente " + p.getNome());
@@ -74,7 +78,20 @@ public class ExamesDialog extends JDialog {
 		lblDUmDuplo.setBounds(10, 15, 163, 14);
 		getContentPane().add(lblDUmDuplo);
 		
-		Window self = this;
+		JButton btnRemove = new JButton("Remover Selecionado");
+		btnRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					removeSelecionado();
+					atualizarExames();
+				} catch (Exception e) {
+					App.showMsgBox(self, e.getMessage());
+				}
+			}
+		});
+		btnRemove.setBounds(241, 11, 135, 23);
+		getContentPane().add(btnRemove);
+		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -102,5 +119,15 @@ public class ExamesDialog extends JDialog {
 		ArrayList<Exame> exames = this.paciente == null ? Exame.listar(App.db) : Exame.listar(App.db, "pacienteId = " + this.paciente.getID());
 		ExameTableModel model = new ExameTableModel(exames);
 		table.setModel(model);
+	}
+	
+	public void removeSelecionado() throws Exception{
+		if(table.getSelectedRow() >= 0){
+			if(App.showConfirm(this)){
+				ExameTableModel model = (ExameTableModel)table.getModel();
+				Exame ex = model.getRow(table.getSelectedRow());
+				ex.remover(App.db);
+			}
+		}
 	}
 }
