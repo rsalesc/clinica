@@ -7,5 +7,6 @@ Gerenciador para  clínicas, trabalho de Programação Orientado a Objetos - UFB
 
 Alunos:
 
-Roberto Salles
+Roberto Sales
+
 Jeferson Lima
