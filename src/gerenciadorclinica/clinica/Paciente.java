@@ -1,6 +1,7 @@
 package gerenciadorclinica.clinica;
 import gerenciadorclinica.*;
 import gerenciadorclinica.extras.*;
+import gerenciadorclinica.extras.Genero.GeneroEnum;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -220,14 +221,31 @@ public class Paciente extends Entrada implements IPersistente{
 		}else{
 			stm = db.geraUpdateStatement(Paciente.TABELA, map, "id = " + getID());
 			if(stm.executeUpdate() == 0)
-				throw new SQLException("[Problema no banco de dados] A entrada não pôde ser atualizada.");
+				throw new SQLException("[Erro ao atualizar] A entrada não encontrada.");
 		}
 		stm.close();
 	}
 
 	@Override
-	public void carregar(DB db) throws Exception {
-		// TODO Auto-generated method stub
+	public void carregar(DB db) throws SQLException {
+		PreparedStatement stm = db.geraSelectStatement(Paciente.TABELA, "id = " + getID());
+		ResultSet rs = stm.executeQuery();
+		if(!rs.next())
+			throw new SQLException("[Erro ao carregar] Entrada não encontrada.");
+		
+		setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
+		this.nome = rs.getString("nome");
+		this.genero = new Genero(rs.getByte("genero"));
+		this.dataNascimento = DB.unixToDate(rs.getLong("dataNascimento"));
+		this.cpf = rs.getString("cpf");
+		this.rg = rs.getString("rg");
+		this.endereco = rs.getString("endereco");
+		this.telefone = rs.getString("telefone");
+		this.email = rs.getString("email");
+		this.estado = new Estado(rs.getByte("estado"));
+		this.cidade = rs.getString("cidade");
+		this.observacao = rs.getString("observacao");
+		this.bairro = rs.getString("bairro");
 		
 	}
 }

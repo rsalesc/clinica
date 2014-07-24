@@ -69,7 +69,7 @@ public class DB implements Cloneable {
 			if(set[i] instanceof String){
 				stm.setString(i+1, (String)set[i]);
 			}else if(set[i] instanceof Date){
-				stm.setLong(i+1, ((Date)set[i]).getTime()/1000L);
+				stm.setLong(i+1, DB.dateToUnix((Date)set[i]));
 			}else if(set[i] instanceof Integer){
 				stm.setInt(i+1,  ((Integer)set[i]).intValue());
 			}else if(set[i] instanceof Byte){
@@ -88,9 +88,16 @@ public class DB implements Cloneable {
 		return DB.resolvePreparedStatement(connection.prepareStatement("insert into " + tabela + " (" + concatKeys + ") values (" + concatParams + ")"), map.values().toArray());
 	}
 	
-	public PreparedStatement geraSelectStatement(String tabela) throws SQLException{
+	public PreparedStatement geraSelectStatement(String tabela, String where) throws SQLException{
 		checkConnection();
-		return connection.prepareStatement("select * from " + tabela);
+		String query = "select * from " + tabela;
+		if(where != null)
+			query += " WHERE " + where;
+		return connection.prepareStatement(query);
+	}
+	
+	public PreparedStatement geraSelectStatement(String tabela) throws SQLException{
+		return geraSelectStatement(tabela, null);
 	}
 	
 	public PreparedStatement geraUpdateStatement(String tabela, LinkedHashMap<String, Object> map, String where) throws SQLException {
@@ -116,5 +123,13 @@ public class DB implements Cloneable {
 	
 	public static java.sql.Date convertDate(java.util.Date date){
 		return new java.sql.Date(date.getTime());
+	}
+	
+	public static Date unixToDate(long seconds){
+		return new Date(seconds*1000L);
+	}
+	
+	public static long dateToUnix(Date date){
+		return date.getTime() / 1000L;
 	}
 }
