@@ -3,6 +3,7 @@ import gerenciadorclinica.*;
 import gerenciadorclinica.extras.*;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
@@ -60,6 +61,10 @@ public class Paciente extends Entrada implements IPersistente{
 		this.cidade = cidade;
 		this.observacao = observacao;
 		this.bairro = bairro;
+	}
+	
+	public Paciente(int ID){
+		super(ID);
 	}
 
 		
@@ -170,6 +175,7 @@ public class Paciente extends Entrada implements IPersistente{
 		return idade;
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public void salvar(DB db) throws SQLException, NullPointerException {
 		db.checkConnection();
@@ -178,15 +184,19 @@ public class Paciente extends Entrada implements IPersistente{
 			throw new NullPointerException();
 		
 		PreparedStatement stm = null;
+		
 		// Checa se não é uma entrada "repetida"
 		{
-			stm = db.getConnection().prepareStatement("select id from " + TABELA + " WHERE (cpf <> '' AND cpf = ?) OR rg = ?");
+			String query = "select id from " + Paciente.TABELA + " WHERE (cpf <> '' AND cpf = ?) OR rg = ?";
+			if(!isNovaEntrada())
+				query += " AND id <> " + getID();
+			stm = db.getConnection().prepareStatement(query);
 			stm.setString(1,  cpf);
 			stm.setString(2,  rg);
 			if(stm.executeQuery().next())
 				throw new SQLException("CPF ou RG já cadastrado.");
 			
-			stm.close();
+			stm.close();	
 		}
 		
 		LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
@@ -208,8 +218,11 @@ public class Paciente extends Entrada implements IPersistente{
 			stm.executeUpdate();
 			this.setID(db.getUltimoInsertID(Paciente.TABELA));
 		}else{
-			
+			stm = db.geraUpdateStatement(Paciente.TABELA, map, "id = " + getID());
+			if(stm.executeUpdate() == 0)
+				throw new SQLException("[Problema no banco de dados] A entrada não pôde ser atualizada.");
 		}
+		stm.close();
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class App {
 					// DB TESTE
 					{
 						DB data = db.clone();
-						Paciente p = new Paciente("Betinho", new Genero(GeneroEnum.FEMININO), new Date(), "", "123456785", "Minha casa", "Salvador", new Estado((byte) 2), "", "", "", "Costa Pica");
+						Paciente p = new Paciente(7, "Xerequinho", new Genero(GeneroEnum.FEMININO), new Date(), "", "123456789", "Minha casa", "Salvador", new Estado((byte) 2), "", "", "", "Costa Pica");
 						try{
 							data.conecta();
 							p.salvar(data);
