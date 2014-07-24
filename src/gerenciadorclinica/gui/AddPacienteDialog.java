@@ -37,6 +37,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.Date;
+import java.awt.Font;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class AddPacienteDialog extends JDialog {
@@ -69,6 +71,7 @@ public class AddPacienteDialog extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @wbp.parser.constructor
 	 */
 	public AddPacienteDialog(Window owner) {
 		super(owner);
@@ -84,6 +87,8 @@ public class AddPacienteDialog extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JLabel lblPaciente = new JLabel("Nome:");
+		lblPaciente.setForeground(new Color(165, 42, 42));
+		lblPaciente.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblPaciente.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPaciente.setBounds(10, 11, 61, 14);
 		contentPanel.add(lblPaciente);
@@ -101,9 +106,12 @@ public class AddPacienteDialog extends JDialog {
 		generoSelect = new JComboBox<Genero>();
 		generoSelect.setModel(new GeneroComboBoxModel());
 		generoSelect.setBounds(81, 39, 92, 20);
+		generoSelect.setSelectedIndex(0);
 		contentPanel.add(generoSelect);
 		
 		JLabel lblRg = new JLabel("RG:");
+		lblRg.setForeground(new Color(165, 42, 42));
+		lblRg.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblRg.setBounds(178, 42, 18, 14);
 		contentPanel.add(lblRg);
 		
@@ -151,6 +159,7 @@ public class AddPacienteDialog extends JDialog {
 		estadoSelect = new JComboBox<Estado>();
 		estadoSelect.setModel(new EstadoComboBoxModel());
 		estadoSelect.setBounds(301, 99, 54, 20);
+		estadoSelect.setSelectedIndex(0);
 		contentPanel.add(estadoSelect);
 		
 		JLabel lblEndereco = new JLabel("Endere\u00E7o:");
@@ -202,26 +211,6 @@ public class AddPacienteDialog extends JDialog {
 		lblObs.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblObs.setBounds(25, 198, 46, 14);
 		contentPanel.add(lblObs);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("Salvar");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						try{
-							doCadastrarPaciente();
-						}catch(Exception e){
-							App.showMsgBox(owner,  e.getMessage());
-						}
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-		}
 	}
 	
 	public AddPacienteDialog(Window owner, Paciente paciente) {

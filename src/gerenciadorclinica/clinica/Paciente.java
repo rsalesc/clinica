@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -189,9 +190,10 @@ public class Paciente extends Entrada implements IPersistente{
 		
 		// Checa se não é uma entrada "repetida"
 		{
-			String query = "select id from " + Paciente.TABELA + " WHERE (cpf <> '' AND cpf = ?) OR rg = ?";
-			if(!isNovaEntrada())
+			String query = "select id from " + Paciente.TABELA + " WHERE ((cpf <> '' AND cpf = ?) OR rg = ?)";
+			if(!isNovaEntrada()){
 				query += " AND id <> " + getID();
+			}
 			stm = db.getConnection().prepareStatement(query);
 			stm.setString(1,  cpf);
 			stm.setString(2,  rg);
@@ -253,10 +255,10 @@ public class Paciente extends Entrada implements IPersistente{
 		this.bairro = rs.getString("bairro");
 	}
 	
-	public static Paciente[] listar(DB db) throws SQLException{
+	public static ArrayList<Paciente> listar(DB db) throws SQLException{
 		PreparedStatement stm = db.geraSelectStatement(Paciente.TABELA);
 		ResultSet rs = stm.executeQuery();
-		Vector<Paciente> pacientes = new Vector<Paciente>();
+		ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 		
 		while(rs.next()){
 			Paciente p = new Paciente(rs.getInt("id"));
@@ -264,6 +266,6 @@ public class Paciente extends Entrada implements IPersistente{
 			pacientes.add(p);
 		}
 		
-		return (Paciente[])pacientes.toArray();
+		return pacientes;
 	}
 }
