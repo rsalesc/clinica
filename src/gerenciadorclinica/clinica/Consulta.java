@@ -19,7 +19,7 @@ public class Consulta extends Entrada{
 		super(ID);
 	}
 	
-	public Consulta(Date dataMarcada, Paciente paciente, String observacao, int ID) {
+	public Consulta(int ID, Date dataMarcada, Paciente paciente, String observacao) {
 		super(ID);
 		this.dataMarcada = dataMarcada;
 		this.paciente = paciente;
@@ -97,7 +97,8 @@ public class Consulta extends Entrada{
 			throw new SQLException("[Erro ao carregar] Entrada não encontrada.");
 		
 		setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
-		this.paciente = new Paciente(rs.getByte("paciente"));
+		this.paciente = new Paciente(rs.getByte("pacienteId"));
+		this.paciente.carregar(db);
 		this.dataMarcada = DB.unixToDate(rs.getLong("dataMarcada"));
 		this.observacao = rs.getString("observacao");
 	}

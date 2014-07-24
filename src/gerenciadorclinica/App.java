@@ -1,5 +1,7 @@
 package gerenciadorclinica;
 
+import gerenciadorclinica.clinica.Consulta;
+import gerenciadorclinica.clinica.Exame;
 import gerenciadorclinica.clinica.Paciente;
 import gerenciadorclinica.extras.Estado;
 import gerenciadorclinica.extras.Genero;
@@ -28,16 +30,18 @@ public class App {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					// DB TESTE
 					{
+						Date agora = new Date();
 						DB data = db.clone();
-						Paciente p = new Paciente(7);
+						Consulta c = new Consulta(1);
 						try{
 							data.conecta();
-							p.carregar(data);
+							c.carregar(data);
+							Paciente p = c.getPaciente();
+							System.out.println(c.getObservacao());
+							System.out.println(p.getNome());
 						}catch(SQLException e){
 							System.out.println(e.getMessage());
 						} finally{
-							System.out.println(p.getID());
-							System.out.println(p.getNome());
 							data.desconecta();
 						}
 					}

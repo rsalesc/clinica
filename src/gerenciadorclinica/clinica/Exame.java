@@ -26,7 +26,7 @@ public class Exame extends Entrada {
 		this.observacao = observacao;
 	}
 	
-	public Exame(Paciente paciente, String exame, String observacao, int ID) {
+	public Exame(int ID, Paciente paciente, String exame, String observacao) {
 		super(ID);
 		this.exame = exame;
 		this.paciente = paciente;
@@ -91,7 +91,8 @@ public class Exame extends Entrada {
 			throw new SQLException("[Erro ao carregar] Entrada não encontrada.");
 		
 		setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
-		this.paciente = new Paciente(rs.getByte("paciente"));
+		this.paciente = new Paciente(rs.getByte("pacienteId"));
+		this.paciente.carregar(db);
 		this.exame = rs.getString("exame");
 		this.observacao = rs.getString("observacao");
 	}
