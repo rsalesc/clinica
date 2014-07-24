@@ -2,7 +2,6 @@ package gerenciadorclinica.usuario;
 
 import gerenciadorclinica.DB;
 import gerenciadorclinica.Entrada;
-import gerenciadorclinica.extras.exceptions.UsuarioInvalidoException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

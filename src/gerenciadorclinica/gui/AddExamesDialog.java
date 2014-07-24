@@ -1,27 +1,25 @@
 package gerenciadorclinica.gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Window;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-
 import gerenciadorclinica.App;
-import gerenciadorclinica.clinica.Consulta;
 import gerenciadorclinica.clinica.Exame;
 import gerenciadorclinica.clinica.Paciente;
 import gerenciadorclinica.extras.exceptions.FormInvalidoException;
 import gerenciadorclinica.gui.components.ScrollableTextArea;
 
-import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class AddExamesDialog extends JDialog {

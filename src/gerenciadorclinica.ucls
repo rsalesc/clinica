@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="gerenciadorclinica.Entrada" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/Entrada.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="630" y="897"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="gerenciadorclinica.IPersistente" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/IPersistente.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="437" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="gerenciadorclinica.DB" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/DB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="637" y="204"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="gerenciadorclinica.usuario.Usuario" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/usuario/Usuario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="74" y="115"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="gerenciadorclinica.usuario.UsuarioMedico" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/usuario/UsuarioMedico.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="163" y="310"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="gerenciadorclinica.usuario.UsuarioSecretario" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/usuario/UsuarioSecretario.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2" y="310"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="gerenciadorclinica.extras.Validacao" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/Validacao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="152" width="157" x="873" y="11"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="gerenciadorclinica.extras.Utils" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/Utils.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="322" y="71"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="gerenciadorclinica.extras.Genero" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/Genero.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="139" y="584"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="10" language="java" name="gerenciadorclinica.extras.Genero.GeneroEnum" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/Genero.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-59" y="531"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="11" language="java" name="gerenciadorclinica.extras.Estado" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/Estado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="302" y="538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="gerenciadorclinica.clinica.Prescricao" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/clinica/Prescricao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="842" y="896"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="gerenciadorclinica.clinica.Paciente" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/clinica/Paciente.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="232" y="1073"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="gerenciadorclinica.clinica.Exame" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/clinica/Exame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="625" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="gerenciadorclinica.clinica.Consulta" project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/clinica/Consulta.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="630" y="1190"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="gerenciadorclinica.extras.exceptions.RgInvalidoException" 
+    project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/exceptions/RgInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="954" y="216"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="gerenciadorclinica.extras.exceptions.TelefoneInvalidoException" 
+    project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/exceptions/TelefoneInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="969" y="419"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="gerenciadorclinica.extras.exceptions.CpfTamanhoInvalidoException" 
+    project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/exceptions/CpfTamanhoInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1187" y="318"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="gerenciadorclinica.extras.exceptions.RgTamanhoInvalidoException" 
+    project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/exceptions/RgTamanhoInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1187" y="219"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="gerenciadorclinica.extras.exceptions.TelefoneDDDInvalidoException" 
+    project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/exceptions/TelefoneDDDInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1187" y="424"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="gerenciadorclinica.extras.exceptions.EmailInvalidoException" 
+    project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/exceptions/EmailInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1171" y="119"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="gerenciadorclinica.extras.exceptions.CpfInvalidoException" 
+    project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/exceptions/CpfInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="956" y="316"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="gerenciadorclinica.extras.exceptions.UsuarioInvalidoException" 
+    project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/exceptions/UsuarioInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="967" y="523"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="gerenciadorclinica.extras.exceptions.FormInvalidoException" 
+    project="GerenciadorClinica" 
+    file="/GerenciadorClinica/src/gerenciadorclinica/extras/exceptions/FormInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1205" y="525"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="26">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="27" name="genero"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="29">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="30">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="31" name="paciente"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <realization id="35">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="36">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="37" name="genero"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="39">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </nesting>  
+  <generalization id="40">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <generalization id="41">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="42">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="43" name="paciente"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="46" name="estado"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="50">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="22"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

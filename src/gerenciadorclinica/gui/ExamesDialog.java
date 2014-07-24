@@ -1,29 +1,26 @@
 package gerenciadorclinica.gui;
 
 import gerenciadorclinica.App;
-import gerenciadorclinica.clinica.Consulta;
 import gerenciadorclinica.clinica.Exame;
 import gerenciadorclinica.clinica.Paciente;
-import gerenciadorclinica.gui.components.ConsultaTableModel;
 import gerenciadorclinica.gui.components.ExameTableModel;
 
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.JDialog;
 import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 @SuppressWarnings("serial")
 public class ExamesDialog extends JDialog {

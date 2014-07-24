@@ -1,23 +1,6 @@
 package gerenciadorclinica.gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Window;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.Dialog.ModalityType;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-
 import gerenciadorclinica.App;
-import gerenciadorclinica.DB;
 import gerenciadorclinica.clinica.Paciente;
 import gerenciadorclinica.extras.Estado;
 import gerenciadorclinica.extras.Genero;
@@ -26,19 +9,26 @@ import gerenciadorclinica.extras.exceptions.FormInvalidoException;
 import gerenciadorclinica.gui.components.DatePicker;
 import gerenciadorclinica.gui.components.EstadoComboBoxModel;
 import gerenciadorclinica.gui.components.GeneroComboBoxModel;
-
-import java.awt.Dimension;
-
 import gerenciadorclinica.gui.components.ScrollableTextArea;
 
-import javax.swing.UIManager;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.sql.SQLException;
-import java.util.Date;
-import java.awt.Font;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class AddPacienteDialog extends JDialog {

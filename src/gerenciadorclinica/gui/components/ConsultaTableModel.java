@@ -2,7 +2,6 @@ package gerenciadorclinica.gui.components;
 
 import gerenciadorclinica.App;
 import gerenciadorclinica.clinica.Consulta;
-import gerenciadorclinica.clinica.Paciente;
 
 import java.util.ArrayList;
 

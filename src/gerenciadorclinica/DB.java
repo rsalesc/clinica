@@ -7,14 +7,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-
-import javax.tools.JavaCompiler;
 
 public class DB implements Cloneable {
 	

@@ -1,33 +1,25 @@
 package gerenciadorclinica.gui;
 
 import gerenciadorclinica.App;
-import gerenciadorclinica.DB;
-import gerenciadorclinica.clinica.Consulta;
 import gerenciadorclinica.clinica.Paciente;
-import gerenciadorclinica.gui.components.ConsultaTableModel;
 import gerenciadorclinica.gui.components.PacienteTableModel;
-
-import java.awt.Window;
-
-import javax.swing.JDialog;
-import javax.swing.JTable;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.sql.SQLException;
-
-import javax.swing.ListSelectionModel;
-import javax.swing.UIManager;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Component;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
-import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class PacientesDialog extends JDialog {

@@ -1,6 +1,5 @@
 package gerenciadorclinica.gui.components;
 
-import gerenciadorclinica.extras.Estado;
 import gerenciadorclinica.extras.Genero;
 
 import javax.swing.DefaultComboBoxModel;

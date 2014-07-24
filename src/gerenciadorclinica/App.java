@@ -1,25 +1,16 @@
 package gerenciadorclinica;
 
-import gerenciadorclinica.clinica.Consulta;
-import gerenciadorclinica.clinica.Exame;
-import gerenciadorclinica.clinica.Paciente;
-import gerenciadorclinica.extras.Estado;
-import gerenciadorclinica.extras.Genero;
-import gerenciadorclinica.extras.Genero.GeneroEnum;
 import gerenciadorclinica.gui.JanelaPrincipal;
 import gerenciadorclinica.gui.LoginDialog;
 import gerenciadorclinica.usuario.Usuario;
 
 import java.awt.EventQueue;
 import java.awt.Window;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 public class App {
 

@@ -1,16 +1,13 @@
 package gerenciadorclinica.clinica;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import gerenciadorclinica.DB;
-import static java.nio.file.StandardCopyOption.*;
 import gerenciadorclinica.Entrada;
 import gerenciadorclinica.IPersistente;
 
 import java.awt.Desktop;
 import java.awt.Dialog;
-import java.awt.FileDialog;
-import java.awt.Window;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

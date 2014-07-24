@@ -1,19 +1,17 @@
 package gerenciadorclinica.clinica;
-import gerenciadorclinica.*;
-import gerenciadorclinica.extras.*;
-import gerenciadorclinica.extras.Genero.GeneroEnum;
+import gerenciadorclinica.DB;
+import gerenciadorclinica.Entrada;
+import gerenciadorclinica.IPersistente;
+import gerenciadorclinica.extras.Estado;
+import gerenciadorclinica.extras.Genero;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Vector;
 
 public class Paciente extends Entrada implements IPersistente{
 	
