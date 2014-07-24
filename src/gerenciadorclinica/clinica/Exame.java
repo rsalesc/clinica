@@ -3,6 +3,7 @@ import gerenciadorclinica.DB;
 import gerenciadorclinica.Entrada;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 
@@ -84,7 +85,15 @@ public class Exame extends Entrada {
 	}
 	
 	public void carregar(DB db) throws Exception {
+		PreparedStatement stm = db.geraSelectStatement(Exame.TABELA, "id = " + getID());
+		ResultSet rs = stm.executeQuery();
+		if(!rs.next())
+			throw new SQLException("[Erro ao carregar] Entrada não encontrada.");
 		
+		setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
+		this.paciente = new Paciente(rs.getByte("paciente"));
+		this.exame = rs.getString("exame");
+		this.observacao = rs.getString("observacao");
 	}
 	
 	public void vincularResultadoExame(){ }
