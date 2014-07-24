@@ -2,6 +2,7 @@ package gerenciadorclinica.usuario;
 
 import gerenciadorclinica.DB;
 import gerenciadorclinica.Entrada;
+import gerenciadorclinica.extras.exceptions.UsuarioInvalidoException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,19 +12,19 @@ public abstract class Usuario extends Entrada {
 
 	private final static String TABELA = "usuarios";
 	
-	private String username;
+	private String usuario;
 	@SuppressWarnings("unused")
 	private int level;
 	
-	public Usuario(String username, int level, int Id) {
+	public Usuario(String usuario, int level, int Id) {
 		super(Id);
-		this.username = username;
+		this.usuario = usuario;
 		this.level = level;
 	}
 	
-	public Usuario(String username, int level){
+	public Usuario(String usuario, int level){
 		super();
-		this.username = username;
+		this.usuario = usuario;
 		this.level= level;
 	}
 	
@@ -33,19 +34,27 @@ public abstract class Usuario extends Entrada {
 	
 	public void salvar(){}
 	
-	public void carregar(DB db) throws SQLException {
+	public static Usuario getUsuarioAutenticado(DB db, String usuario, String senha) throws UsuarioInvalidoException, SQLException {
 		PreparedStatement stm = null;
 		
-		String query = "select id from " + Usuario.TABELA + " WHERE username = ?";
+		String query = "select id from " + Usuario.TABELA + " WHERE usuario = ? and senha = ?";
 		stm = db.getConnection().prepareStatement(query);
-		stm.setString(1,  username);
+		stm.setString(1,  usuario);
+		stm.setString(2, usuario);
 		
 		ResultSet rs = stm.executeQuery();
-		if(!rs.next())
-			throw new SQLException("[Erro ao carregar] Usuario ou senha incorretos.");
+		if(!stm.executeQuery().next())
+			throw new UsuarioInvalidoException();
 		
+		rs.getString("usuario");
+		rs.getString("senha");
+		int level = rs.getInt("nivel");
 		
-		
+		return (level == 1) ? new UsuarioMedico(usuario) : new UsuarioSecretario(usuario);
+	}
+	
+	public String getUsuario(){
+		return this.usuario;
 	}
 	
 	public abstract int getLevel();
