@@ -3,6 +3,7 @@ import gerenciadorclinica.DB;
 import gerenciadorclinica.Entrada;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 
 public class Exame extends Entrada {
@@ -12,6 +13,10 @@ public class Exame extends Entrada {
 	private String observacao;
 	
 	private final static String TABELA = "exames";
+	
+	public Exame(int ID){
+		super(ID);
+	}
 	
 	public Exame(Paciente paciente, String exame, String observacao) {
 		super();
@@ -57,11 +62,11 @@ public class Exame extends Entrada {
 		PreparedStatement stm = null;
 		
 		if (paciente.getID() == 0)
-			throw new Exception("ID inválido");
+			throw new Exception("ID inválido.");
 		
 		LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put("exame", exame);
-		map.put("paciente", paciente.getID());
+		map.put("pacienteId", paciente.getID());
 		map.put("observacao", observacao);
 		
 		if(isNovaEntrada()){
@@ -70,11 +75,17 @@ public class Exame extends Entrada {
 			this.setID(db.getUltimoInsertID(Exame.TABELA));
 		}
 		else{
-			
+			map.remove("pacienteId");
+			stm = db.geraUpdateStatement(Exame.TABELA, map, "id = " + getID());
+			if(stm.executeUpdate() == 0)
+				throw new SQLException("[Problema no banco de dados] A entrada não pôde ser atualizada.");
 		}
+		stm.close();
 	}
 	
-	public void solicitarExame(){}
+	public void carregar(DB db) throws Exception {
+		
+	}
 	
 	public void vincularResultadoExame(){ }
 
