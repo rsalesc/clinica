@@ -30,7 +30,6 @@ public class App {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					// DB TESTE
 					{
-						Date agora = new Date();
 						DB data = db.clone();
 						Consulta c = new Consulta(1);
 						try{

@@ -93,11 +93,11 @@ public class Paciente extends Entrada implements IPersistente{
 		this.genero = genero;
 	}
 
-	public Date getDatanascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDatanascimento(Date dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
