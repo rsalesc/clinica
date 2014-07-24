@@ -5,6 +5,7 @@ import gerenciadorclinica.Entrada;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class Exame extends Entrada {
@@ -90,11 +91,34 @@ public class Exame extends Entrada {
 		if(!rs.next())
 			throw new SQLException("[Erro ao carregar] Entrada não encontrada.");
 		
-		setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
-		this.paciente = new Paciente(rs.getByte("pacienteId"));
-		this.paciente.carregar(db);
+		preencheEntrada(db, rs);
+	}
+	
+	@Override
+	public void preencheEntrada(DB db, ResultSet rs) throws SQLException{
+		super.preencheEntrada(db,  rs);
 		this.exame = rs.getString("exame");
+		this.paciente = new Paciente(rs.getInt("pacienteId"));
+		this.paciente.carregar(db);
 		this.observacao = rs.getString("observacao");
+	}
+	
+	public static ArrayList<Exame> listar(DB db, String where) throws Exception{
+		PreparedStatement stm = db.geraSelectStatement(Exame.TABELA, where);
+		ResultSet rs = stm.executeQuery();
+		ArrayList<Exame> consultas = new ArrayList<Exame>();
+		
+		while(rs.next()){
+			Exame c = new Exame(rs.getInt("id"));
+			c.preencheEntrada(db, rs);
+			consultas.add(c);
+		}
+		
+		return consultas;
+	}
+	
+	public static ArrayList<Exame> listar(DB db) throws Exception{
+		return listar(db, null);
 	}
 	
 	public void vincularResultadoExame(){ }

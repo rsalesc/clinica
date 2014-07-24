@@ -80,7 +80,7 @@ public class AddPacienteDialog extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setModalityType(ModalityType.APPLICATION_MODAL);
-		setBounds(100, 100, 375, 345);
+		setBounds(100, 100, 375, 383);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -126,11 +126,8 @@ public class AddPacienteDialog extends JDialog {
 		contentPanel.add(lblDataNasc);
 		
 		datePicker = new DatePicker(new Date());
-		datePicker.setMaximumSize(new Dimension(32813, 20));
-		datePicker.getJFormattedTextField().setPreferredSize(new Dimension(178, 20));
 		datePicker.setMinimumSize(new Dimension(52, 20));
-		datePicker.setPreferredSize(new Dimension(202, 20));
-		datePicker.setBounds(81, 68, 115, 20);
+		datePicker.setBounds(81, 68, 115, 23);
 		contentPanel.add(datePicker);
 		
 		JLabel lblCpf = new JLabel("CPF:");
@@ -204,13 +201,34 @@ public class AddPacienteDialog extends JDialog {
 		
 		obsField = new ScrollableTextArea();
 		obsField.setBorder(UIManager.getBorder("TextField.border"));
-		obsField.setBounds(81, 192, 274, 81);
+		obsField.setBounds(81, 210, 274, 81);
 		contentPanel.add(obsField);
 		
 		JLabel lblObs = new JLabel("Obs:");
 		lblObs.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblObs.setBounds(25, 198, 46, 14);
+		lblObs.setBounds(25, 216, 46, 14);
 		contentPanel.add(lblObs);
+		
+		Window self = this;
+		
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					doCadastrarPaciente();
+				} catch (Exception e1) {
+					App.showMsgBox(self, e1.getMessage());
+				}
+			}
+		});
+		btnSalvar.setBounds(274, 302, 81, 23);
+		contentPanel.add(btnSalvar);
+		
+		JLabel lblDdXxxxxxxx = new JLabel("Formato: DD XXXXXXXX");
+		lblDdXxxxxxxx.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDdXxxxxxxx.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblDdXxxxxxxx.setBounds(239, 185, 116, 14);
+		contentPanel.add(lblDdXxxxxxxx);
 	}
 	
 	public AddPacienteDialog(Window owner, Paciente paciente) {

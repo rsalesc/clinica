@@ -5,6 +5,7 @@ import gerenciadorclinica.Entrada;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -41,11 +42,11 @@ public class Consulta extends Entrada{
 		this.observacao = observacao;
 	}
 	
-	public Date getdataMarcada() {
+	public Date getDataMarcada() {
 		return dataMarcada;
 	}
 
-	public void setdataMarcada(Date dataMarcada) {
+	public void setDataMarcada(Date dataMarcada) {
 		this.dataMarcada = dataMarcada;
 	}
 
@@ -96,11 +97,34 @@ public class Consulta extends Entrada{
 		if(!rs.next())
 			throw new SQLException("[Erro ao carregar] Entrada não encontrada.");
 		
-		setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
-		this.paciente = new Paciente(rs.getByte("pacienteId"));
+		preencheEntrada(db, rs);
+	}
+	
+	@Override
+	public void preencheEntrada(DB db, ResultSet rs) throws SQLException{
+		super.preencheEntrada(db, rs);
+		this.paciente = new Paciente(rs.getInt("pacienteId"));
 		this.paciente.carregar(db);
 		this.dataMarcada = DB.unixToDate(rs.getLong("dataMarcada"));
 		this.observacao = rs.getString("observacao");
+	}
+	
+	public static ArrayList<Consulta> listar(DB db, String where) throws Exception{
+		PreparedStatement stm = db.geraSelectStatement(Consulta.TABELA, where);
+		ResultSet rs = stm.executeQuery();
+		ArrayList<Consulta> consultas = new ArrayList<Consulta>();
+		
+		while(rs.next()){
+			Consulta c = new Consulta(rs.getInt("id"));
+			c.preencheEntrada(db, rs);
+			consultas.add(c);
+		}
+		
+		return consultas;
+	}
+	
+	public static ArrayList<Consulta> listar(DB db) throws Exception{
+		return listar(db, null);
 	}
 	
 }

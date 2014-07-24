@@ -1,25 +1,25 @@
 package gerenciadorclinica.gui.components;
 
+import gerenciadorclinica.App;
+import gerenciadorclinica.clinica.Consulta;
 import gerenciadorclinica.clinica.Paciente;
 
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 @SuppressWarnings("serial")
-public class PacienteTableModel extends AbstractTableModel implements TableModel {
+public class ConsultaTableModel extends AbstractTableModel {
 
+	public static String[] columns = {"Paciente", "Data Marcada", "Observações"};
+	private ArrayList<Consulta> rows;
 	
-	public static String[] columns = {"Nome", "Idade", "RG", "Gênero", "Telefone"};
-	private ArrayList<Paciente> rows;
-	
-	public PacienteTableModel(){
-		rows = new ArrayList<Paciente>();
+	public ConsultaTableModel(){
+		rows = new ArrayList<Consulta>();
 	}
 	
-	public PacienteTableModel(ArrayList<Paciente> pacientes){
-		rows = pacientes;
+	public ConsultaTableModel(ArrayList<Consulta> consultas){
+		rows = consultas;
 	}
 	
 	@Override
@@ -32,24 +32,20 @@ public class PacienteTableModel extends AbstractTableModel implements TableModel
 		return rows.size();
 	}
 	
-	public Paciente getRow(int row){
+	public Consulta getRow(int row){
 		return rows.get(row);
 	}
 	
 	@Override
 	public Object getValueAt(int row, int column) {
-		Paciente p = getRow(row);
+		Consulta c = getRow(row);
 		switch(column){
 			case 0:
-				return p.getNome();
+				return c.getPaciente().getNome();
 			case 1:
-				return new Integer(p.getIdade());
+				return App.dataFormato.format(c.getDataMarcada());
 			case 2:
-				return p.getRg();
-			case 3:
-				return p.getGenero();
-			case 4:
-				return p.getTelefone();
+				return c.getObservacao();
 		}
 		return null;
 	}
@@ -59,4 +55,5 @@ public class PacienteTableModel extends AbstractTableModel implements TableModel
 		// TODO Auto-generated method stub
 		return columns[column];
 	}
+
 }

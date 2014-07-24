@@ -35,10 +35,21 @@ public class AddConsultaDialog extends JDialog {
 	private DatePicker dataMarcada;
 	private ScrollableTextArea obsField;
 	private Paciente paciente;
+	private Consulta consulta;
 
 	public static void showDialog(Window owner, Paciente p) {
 		try {
 			AddConsultaDialog dialog = new AddConsultaDialog(owner, p);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void showDialog(Window owner, Consulta c) {
+		try {
+			AddConsultaDialog dialog = new AddConsultaDialog(owner, c);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -120,11 +131,22 @@ public class AddConsultaDialog extends JDialog {
 		pacienteField.setText(p.getNome());
 	}
 	
+	public AddConsultaDialog(Window owner, Consulta c){
+		this(owner, c.getPaciente());
+		setTitle("Editar Consulta");
+		this.consulta = c;
+		
+		dataMarcada.setSelectedDate(c.getDataMarcada());
+		obsField.setText(c.getObservacao());
+	}
+	
 	protected void doMarcarConsulta() throws Exception{
 		if(dataMarcada.getSelectedDate() == null)
 			throw new FormInvalidoException("Campos obrigatórios não foram preenchidos.");
 		
 		Consulta c = new Consulta(dataMarcada.getSelectedDate(), paciente, obsField.getText());
+		if(consulta != null)
+			c.setID(consulta.getID());
 		
 		c.salvar(App.db);
 		

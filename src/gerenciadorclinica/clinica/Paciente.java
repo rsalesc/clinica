@@ -236,11 +236,11 @@ public class Paciente extends Entrada implements IPersistente{
 		if(!rs.next())
 			throw new SQLException("[Erro ao carregar] Entrada não encontrada.");
 		
-		preenchePaciente(rs);		
+		preencheEntrada(db, rs);		
 	}
 	
-	public void preenchePaciente(ResultSet rs) throws SQLException{
-		setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
+	@Override
+	public void preencheEntrada(DB db, ResultSet rs) throws SQLException{
 		this.nome = rs.getString("nome");
 		this.genero = new Genero(rs.getByte("genero"));
 		this.dataNascimento = DB.unixToDate(rs.getLong("dataNascimento"));
@@ -262,7 +262,7 @@ public class Paciente extends Entrada implements IPersistente{
 		
 		while(rs.next()){
 			Paciente p = new Paciente(rs.getInt("id"));
-			p.preenchePaciente(rs);
+			p.preencheEntrada(db, rs);
 			pacientes.add(p);
 		}
 		

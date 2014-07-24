@@ -22,6 +22,7 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
+import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class PacientesDialog extends JDialog {
@@ -112,6 +113,34 @@ public class PacientesDialog extends JDialog {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBounds(10, 79, 570, 290);
 		scrollPane.setViewportView(table);
+		
+		JLabel label = new JLabel("D\u00EA um duplo clique para editar.");
+		label.setBounds(10, 49, 163, 14);
+		getContentPane().add(label);
+		
+		JButton btnListarConsultas = new JButton("Listar Consultas");
+		btnListarConsultas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow() >= 0){
+					Paciente p = ((PacienteTableModel)table.getModel()).getRow(table.getSelectedRow());
+					ConsultasDialog.showDialog(self, p);
+				}
+			}
+		});
+		btnListarConsultas.setBounds(310, 45, 111, 23);
+		getContentPane().add(btnListarConsultas);
+		
+		JButton btnListarExames = new JButton("Listar Exames");
+		btnListarExames.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow() >= 0){
+					Paciente p = ((PacienteTableModel)table.getModel()).getRow(table.getSelectedRow());
+					ExamesDialog.showDialog(self, p);
+				}
+			}
+		});
+		btnListarExames.setBounds(189, 45, 111, 23);
+		getContentPane().add(btnListarExames);
 		
 		try{
 			atualizarPacientes();

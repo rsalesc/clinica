@@ -27,6 +27,7 @@ import javax.swing.UIManager;
 public class AddExamesDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private Exame exame;
 	private Paciente paciente;
 	private ScrollableTextArea obsField;
 	private JTextField pacienteField;
@@ -44,9 +45,20 @@ public class AddExamesDialog extends JDialog {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void showDialog(Window owner, Exame ex) {
+		try {
+			AddExamesDialog dialog = new AddExamesDialog(owner, ex);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Create the dialog.
+	 * @wbp.parser.constructor
 	 */
 	public AddExamesDialog(Window owner, Paciente p) {
 		super(owner);
@@ -121,11 +133,23 @@ public class AddExamesDialog extends JDialog {
 		contentPanel.add(lblExame);
 	}
 	
+	public AddExamesDialog(Window owner, Exame ex){
+		this(owner, ex.getPaciente());
+		
+		setTitle("Editar Consulta");
+		this.exame = ex;
+		
+		exameField.setText(ex.getExame());
+		obsField.setText(ex.getObservacao());
+	}
+	
 	public void doSolicitarExame() throws Exception{
 		if(exameField.getText().isEmpty())
 			throw new FormInvalidoException("Campos obrigatórios não foram preenchidos.");
 		
 		Exame e = new Exame(paciente, exameField.getText(), obsField.getText());
+		if(this.exame != null)
+			e.setID(this.exame.getID());
 		
 		e.salvar(App.db);
 		

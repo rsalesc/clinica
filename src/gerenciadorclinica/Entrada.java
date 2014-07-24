@@ -1,4 +1,6 @@
 package gerenciadorclinica;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class Entrada{
@@ -33,6 +35,11 @@ public class Entrada{
 	
 	public boolean isNovaEntrada(){
 		return (getID() == 0);
+	}
+	
+	public void preencheEntrada(DB db, ResultSet rs) throws SQLException{
+		setID(rs.getInt("id"));
+		setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
 	}
 	
 }
