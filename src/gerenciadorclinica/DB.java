@@ -82,9 +82,24 @@ public class DB implements Cloneable {
 	}
 	
 	public PreparedStatement geraInsertStatement(String tabela, LinkedHashMap<String, Object> map) throws SQLException {
+		checkConnection();
 		String concatKeys = Utils.join(",", map.keySet().toArray());
 		String concatParams = Utils.join(",", "?", map.size());
 		return DB.resolvePreparedStatement(connection.prepareStatement("insert into " + tabela + " (" + concatKeys + ") values (" + concatParams + ")"), map.values().toArray());
+	}
+	
+	public PreparedStatement geraSelectStatement(String tabela) throws SQLException{
+		checkConnection();
+		return connection.prepareStatement("select * from " + tabela);
+	}
+	
+	public PreparedStatement geraUpdateStatement(String tabela, LinkedHashMap<String, Object> map, String where) throws SQLException {
+		String concatSet = Utils.join(" = ?, ", map.keySet().toArray());
+		if(concatSet.length() == 0)
+			throw new SQLException("Parâmetros inválidos.");
+		concatSet += " = ?";
+		String query = "update " + tabela + " SET " + concatSet + " WHERE " + where;
+		return DB.resolvePreparedStatement(connection.prepareStatement(query), map.values().toArray());
 	}
 	
 	public int getUltimoInsertID(String tabela) throws SQLException{
