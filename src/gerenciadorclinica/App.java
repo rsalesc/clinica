@@ -11,7 +11,6 @@ import java.awt.EventQueue;
 import java.sql.SQLException;
 import java.util.Date;
 
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class App {

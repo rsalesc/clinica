@@ -17,12 +17,17 @@ public class Genero {
 		public void setValue(byte gen) {
 			this.value = gen;
 		}
+		
 	}
 	
 	private GeneroEnum genero;
 	
 	public Genero(GeneroEnum genero) {
 		this.genero = genero;
+	}
+	
+	public Genero(byte genero){
+		setGenero(genero);
 	}
 
 	public GeneroEnum getGenero() {
@@ -31,6 +36,10 @@ public class Genero {
 
 	public void setGenero(GeneroEnum genero) {
 		this.genero = genero;
+	}
+	
+	public void setGenero(byte genero){
+		this.genero = GeneroEnum.values()[genero];
 	}
 
 	@Override
