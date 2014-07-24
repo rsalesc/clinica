@@ -2,7 +2,7 @@ package gerenciadorclinica.gui;
 
 import gerenciadorclinica.App;
 import gerenciadorclinica.extras.exceptions.FormInvalidoException;
-import gerenciadorclinica.usuario.Usuario;
+import gerenciadorclinica.usuario.AbstractUsuario;
 
 import java.awt.Component;
 import java.awt.Window;
@@ -117,7 +117,7 @@ public class LoginDialog extends JDialog {
 		String password = new String(passwordField.getPassword());
 		if(loginField.getText().isEmpty() || password.isEmpty())
 			throw new FormInvalidoException("Os campos obrigatórios não foram preenchidos.");
-		App.usuario = Usuario.getUsuarioAutenticado(App.db, loginField.getText(), password);
+		App.usuario = AbstractUsuario.getUsuarioAutenticado(App.db, loginField.getText(), password);
 		wasLoginHit = true;
 		dispose();
 	}

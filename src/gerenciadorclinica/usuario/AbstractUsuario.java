@@ -7,28 +7,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class Usuario extends Entrada {
+public abstract class AbstractUsuario extends Entrada {
 
 	private final static String TABELA = "usuarios";
 	
 	private String usuario;
 	private String nome;
 	
-	public Usuario(int Id) {
+	public AbstractUsuario(int Id) {
 		super(Id);
 	}
 	
-	public Usuario(int Id, String usuario) {
+	public AbstractUsuario(int Id, String usuario) {
 		super(Id);
 		this.usuario = usuario;
 	}
 	
 	public void salvar(){}
 	
-	public static Usuario getUsuarioAutenticado(DB db, String usuario, String senha) throws SQLException {
+	public static AbstractUsuario getUsuarioAutenticado(DB db, String usuario, String senha) throws SQLException {
 		PreparedStatement stm = null;
 		
-		String query = "select * from " + Usuario.TABELA + " WHERE usuario = ? and senha = ?";
+		String query = "select * from " + AbstractUsuario.TABELA + " WHERE usuario = ? and senha = ?";
 		stm = db.getConnection().prepareStatement(query);
 		stm.setString(1,  usuario);
 		stm.setString(2, usuario);
@@ -40,7 +40,7 @@ public abstract class Usuario extends Entrada {
 		int id = rs.getInt("id");
 		int level = rs.getInt("nivel");
 		
-		Usuario u = (level == 1) ? new UsuarioMedico(id, usuario) : new UsuarioSecretario(id, usuario); 
+		AbstractUsuario u = (level == 1) ? new UsuarioMedico(id, usuario) : new UsuarioSecretario(id, usuario); 
 		u.setNome(rs.getString("nome"));
 		u.setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
 		

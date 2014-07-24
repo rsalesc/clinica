@@ -2,7 +2,7 @@ package gerenciadorclinica;
 
 import gerenciadorclinica.gui.JanelaPrincipal;
 import gerenciadorclinica.gui.LoginDialog;
-import gerenciadorclinica.usuario.Usuario;
+import gerenciadorclinica.usuario.AbstractUsuario;
 
 import java.awt.EventQueue;
 import java.awt.Window;
@@ -17,7 +17,7 @@ public class App {
 	
 	public static final DB db = new DB("jdbc:sqlite:clinica.db");
 	public static final DateFormat dataFormato = new SimpleDateFormat("dd/MM/yyyy");
-	public static Usuario usuario = null;
+	public static AbstractUsuario usuario = null;
 	
 	/**
 	 * Executa a aplicação

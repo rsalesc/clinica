@@ -1,7 +1,7 @@
 package gerenciadorclinica.usuario;
 
 
-public class UsuarioMedico extends Usuario {
+public class UsuarioMedico extends AbstractUsuario {
 
 	public UsuarioMedico(int id) {
 		super(id);
