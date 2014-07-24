@@ -3,6 +3,8 @@ import gerenciadorclinica.DB;
 import gerenciadorclinica.Entrada;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -12,6 +14,10 @@ public class Consulta extends Entrada{
 	private String observacao;
 	
 	private final static String TABELA = "consultas";
+	
+	public Consulta(int ID){
+		super(ID);
+	}
 	
 	public Consulta(Date dataMarcada, Paciente paciente, String observacao, int ID) {
 		super(ID);
@@ -63,11 +69,11 @@ public class Consulta extends Entrada{
 		PreparedStatement stm = null;
 		
 		if (paciente.getID() == 0)
-			throw new Exception("ID inválido");
+			throw new Exception("ID inválido.");
 		
 		LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put("dataMarcada", dataMarcada);
-		map.put("paciente", paciente.getID());
+		map.put("pacienteId", paciente.getID());
 		map.put("observacao", observacao);
 		
 		if(isNovaEntrada()){
@@ -76,8 +82,24 @@ public class Consulta extends Entrada{
 			this.setID(db.getUltimoInsertID(Consulta.TABELA));
 		}
 		else{
-			
+			map.remove("pacienteId");
+			stm = db.geraUpdateStatement(Consulta.TABELA, map, "id = " + getID());
+			if(stm.executeUpdate() == 0)
+				throw new SQLException("[Problema no banco de dados] A entrada não pôde ser atualizada.");
 		}
+		stm.close();
+	}
+	
+	public void carregar(DB db) throws Exception {
+		PreparedStatement stm = db.geraSelectStatement(Consulta.TABELA, "id = " + getID());
+		ResultSet rs = stm.executeQuery();
+		if(!rs.next())
+			throw new SQLException("[Erro ao carregar] Entrada não encontrada.");
+		
+		setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
+		this.paciente = new Paciente(rs.getByte("paciente"));
+		this.dataMarcada = DB.unixToDate(rs.getLong("dataMarcada"));
+		this.observacao = rs.getString("observacao");
 	}
 	
 }
