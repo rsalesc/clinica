@@ -6,14 +6,14 @@ public class Prescricao extends Entrada{
 	private String prescricao;
 	private String observacao;
 	
-	public Prescricao(String prescricao, int ID) {
-		super(ID);
-		this.prescricao = prescricao;
-		this.observacao = "";
-	}
-
 	public Prescricao(String prescricao, String observacao, int ID) {
 		super(ID);
+		this.prescricao = prescricao;
+		this.observacao = observacao;
+	}
+
+	public Prescricao(String prescricao, String observacao) {
+		super();
 		this.prescricao = prescricao;
 		this.observacao = observacao;
 	}

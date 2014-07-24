@@ -13,18 +13,18 @@ public class Exame extends Entrada {
 	
 	private final static String TABELA = "exames";
 	
-	public Exame(Paciente paciente, String exame) {
+	public Exame(Paciente paciente, String exame, String observacao) {
 		super();
 		this.exame = exame;
 		this.paciente = paciente;
-		this.observacao = "";
+		this.observacao = observacao;
 	}
 	
-	public Exame(Paciente paciente, String exame, int ID) {
+	public Exame(Paciente paciente, String exame, String observacao, int ID) {
 		super(ID);
 		this.exame = exame;
 		this.paciente = paciente;
-		this.observacao = "";
+		this.observacao = observacao;
 	}
 	
 	public String getExame() {
