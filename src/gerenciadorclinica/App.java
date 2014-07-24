@@ -29,14 +29,15 @@ public class App {
 					// DB TESTE
 					{
 						DB data = db.clone();
-						Paciente p = new Paciente(7, "Xerequinho", new Genero(GeneroEnum.FEMININO), new Date(), "", "123456789", "Minha casa", "Salvador", new Estado((byte) 2), "", "", "", "Costa Pica");
+						Paciente p = new Paciente(7);
 						try{
 							data.conecta();
-							p.salvar(data);
+							p.carregar(data);
 						}catch(SQLException e){
 							System.out.println(e.getMessage());
 						} finally{
 							System.out.println(p.getID());
+							System.out.println(p.getNome());
 							data.desconecta();
 						}
 					}
