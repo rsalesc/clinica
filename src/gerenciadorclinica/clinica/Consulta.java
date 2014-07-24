@@ -64,7 +64,7 @@ public class Consulta extends Entrada implements IPersistente{
 	public void desmarcarConsulta(){}
 	
 	// public final static Consulta[] pesquisarConsultas(String paciente);
-	
+	// Trabalho Finalizado
 	public void salvar(DB db) throws Exception {
 		db.checkConnection();
 		
