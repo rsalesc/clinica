@@ -15,9 +15,20 @@ public abstract class Usuario extends Entrada {
 	@SuppressWarnings("unused")
 	private int level;
 	
-	public Usuario(String username, int level) {
+	public Usuario(String username, int level, int Id) {
+		super(Id);
 		this.username = username;
 		this.level = level;
+	}
+	
+	public Usuario(String username, int level){
+		super();
+		this.username = username;
+		this.level= level;
+	}
+	
+	public Usuario(int Id){
+		super(Id);
 	}
 	
 	public void salvar(){}
