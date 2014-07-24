@@ -7,6 +7,7 @@ import gerenciadorclinica.clinica.Paciente;
 import gerenciadorclinica.gui.components.ConsultaTableModel;
 import gerenciadorclinica.gui.components.ExameTableModel;
 
+import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.MouseAdapter;
@@ -22,6 +23,7 @@ import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 @SuppressWarnings("serial")
 public class ExamesDialog extends JDialog {
@@ -61,11 +63,20 @@ public class ExamesDialog extends JDialog {
 		getContentPane().setLayout(null);
 		
 		JButton btnVincularArquivo = new JButton("Vincular Arquivo");
+		btnVincularArquivo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					vinculaArquivo((Dialog)self);
+				} catch (IOException e1) {
+					App.showMsgBox(self, e1.getMessage());
+				}
+			}
+		});
 		btnVincularArquivo.setBounds(386, 11, 109, 23);
 		getContentPane().add(btnVincularArquivo);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 52, 485, 256);
+		scrollPane.setBounds(10, 79, 485, 229);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -91,6 +102,19 @@ public class ExamesDialog extends JDialog {
 		});
 		btnRemove.setBounds(241, 11, 135, 23);
 		getContentPane().add(btnRemove);
+		
+		JButton btnVerArquivosVinculados = new JButton("Ver Arquivos Vinculados");
+		btnVerArquivosVinculados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					showArquivosVinculados();
+				} catch (IOException e1) {
+					App.showMsgBox(self, e1.getMessage());
+				}
+			}
+		});
+		btnVerArquivosVinculados.setBounds(332, 45, 163, 23);
+		getContentPane().add(btnVerArquivosVinculados);
 		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
@@ -119,6 +143,22 @@ public class ExamesDialog extends JDialog {
 		ArrayList<Exame> exames = this.paciente == null ? Exame.listar(App.db) : Exame.listar(App.db, "pacienteId = " + this.paciente.getID());
 		ExameTableModel model = new ExameTableModel(exames);
 		table.setModel(model);
+	}
+	
+	public void vinculaArquivo(Dialog d) throws IOException{
+		if(table.getSelectedRow() >= 0){
+			ExameTableModel model = (ExameTableModel)table.getModel();
+			Exame ex = model.getRow(table.getSelectedRow());
+			ex.vincularArquivo(d);
+		}
+	}
+	
+	public void showArquivosVinculados() throws IOException{
+		if(table.getSelectedRow() >= 0){
+			ExameTableModel model = (ExameTableModel)table.getModel();
+			Exame ex = model.getRow(table.getSelectedRow());
+			ex.verArquivosVinculados();
+		}
 	}
 	
 	public void removeSelecionado() throws Exception{

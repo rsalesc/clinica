@@ -79,6 +79,11 @@ public class PacientesDialog extends JDialog {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				showAddPaciente();
+				try {
+					atualizarPacientes();
+				} catch (SQLException e1) {
+					App.showMsgBox(self, e1.getMessage());
+				}
 			}
 		});
 		btnCadastrar.setBounds(491, 11, 89, 23);

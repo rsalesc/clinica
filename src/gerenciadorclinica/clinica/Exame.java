@@ -1,13 +1,26 @@
 package gerenciadorclinica.clinica;
 import gerenciadorclinica.DB;
+import static java.nio.file.StandardCopyOption.*;
 import gerenciadorclinica.Entrada;
 import gerenciadorclinica.IPersistente;
 
+import java.awt.Desktop;
+import java.awt.Dialog;
+import java.awt.FileDialog;
+import java.awt.Window;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+
+import javax.swing.JFileChooser;
 
 public class Exame extends Entrada implements IPersistente {
 
@@ -122,7 +135,29 @@ public class Exame extends Entrada implements IPersistente {
 		return listar(db, null);
 	}
 	
-	public void vincularResultadoExame(){ }
+	public void vincularArquivo(Dialog parent) throws IOException{
+		JFileChooser fileChooser = new JFileChooser();
+		if(fileChooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION){
+			File file = fileChooser.getSelectedFile();
+			if(!file.exists() || file.isDirectory())
+				throw new IOException("Arquivo inválido.");
+			
+			Path path = Paths.get("arquivos/" + getID());
+			Files.createDirectories(path);
+			
+			Path destino = Paths.get(path.toString() + "/" + file.getName());
+			Files.copy(Paths.get(file.getPath()), destino, REPLACE_EXISTING);	
+		}
+	}
+	
+	public void verArquivosVinculados() throws IOException{
+		File dir = Paths.get("arquivos/" + getID()).toFile();
+		if(!dir.exists() || !dir.isDirectory())
+			throw new IOException("Não há nenhum arquivo vinculado para este exame.");
+		
+		Desktop.getDesktop().open(dir);
+		
+	}
 
 	@Override
 	public void remover(DB db) throws Exception {
