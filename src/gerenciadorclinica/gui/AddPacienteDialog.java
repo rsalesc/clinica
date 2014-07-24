@@ -8,17 +8,35 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Dialog.ModalityType;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+
+import gerenciadorclinica.App;
+import gerenciadorclinica.DB;
+import gerenciadorclinica.clinica.Paciente;
+import gerenciadorclinica.extras.Estado;
+import gerenciadorclinica.extras.Genero;
+import gerenciadorclinica.extras.Validacao;
+import gerenciadorclinica.extras.exceptions.FormInvalidoException;
 import gerenciadorclinica.gui.components.DatePicker;
+import gerenciadorclinica.gui.components.EstadoComboBoxModel;
+import gerenciadorclinica.gui.components.GeneroComboBoxModel;
+
 import java.awt.Dimension;
+
 import gerenciadorclinica.gui.components.ScrollableTextArea;
+
 import javax.swing.UIManager;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class AddPacienteDialog extends JDialog {
@@ -28,15 +46,20 @@ public class AddPacienteDialog extends JDialog {
 	private JTextField rgField;
 	private JTextField cpfField;
 	private JTextField enderecoField;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField cidadeField;
+	private JTextField bairroField;
+	private JTextField emailField;
+	private JTextField telefoneField;
+	private JComboBox<Estado> estadoSelect;
+	private JComboBox<Genero> generoSelect;
+	private DatePicker datePicker;
+	private ScrollableTextArea obsField;
+	private Paciente paciente;
 
 	
-	public static void showDialog(Window owner){
+	public static void showDialog(Window owner, Paciente paciente){
 		try {
-			AddPacienteDialog dialog = new AddPacienteDialog(owner);
+			AddPacienteDialog dialog = (paciente == null) ? new AddPacienteDialog(owner) : new AddPacienteDialog(owner, paciente);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -49,6 +72,7 @@ public class AddPacienteDialog extends JDialog {
 	 */
 	public AddPacienteDialog(Window owner) {
 		super(owner);
+		paciente = null;
 		setTitle("Cadastrar Paciente");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setResizable(false);
@@ -74,7 +98,8 @@ public class AddPacienteDialog extends JDialog {
 		lblGnero.setBounds(25, 42, 46, 14);
 		contentPanel.add(lblGnero);
 		
-		JComboBox generoSelect = new JComboBox();
+		generoSelect = new JComboBox<Genero>();
+		generoSelect.setModel(new GeneroComboBoxModel());
 		generoSelect.setBounds(81, 39, 92, 20);
 		contentPanel.add(generoSelect);
 		
@@ -92,7 +117,7 @@ public class AddPacienteDialog extends JDialog {
 		lblDataNasc.setBounds(10, 72, 61, 14);
 		contentPanel.add(lblDataNasc);
 		
-		DatePicker datePicker = new DatePicker();
+		datePicker = new DatePicker(new Date());
 		datePicker.setMaximumSize(new Dimension(32813, 20));
 		datePicker.getJFormattedTextField().setPreferredSize(new Dimension(178, 20));
 		datePicker.setMinimumSize(new Dimension(52, 20));
@@ -114,18 +139,19 @@ public class AddPacienteDialog extends JDialog {
 		contentPanel.add(enderecoField);
 		enderecoField.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setBounds(81, 130, 99, 20);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		cidadeField = new JTextField();
+		cidadeField.setBounds(81, 130, 99, 20);
+		contentPanel.add(cidadeField);
+		cidadeField.setColumns(10);
 		
 		JLabel lblUf = new JLabel("UF:");
 		lblUf.setBounds(279, 102, 23, 14);
 		contentPanel.add(lblUf);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(301, 99, 54, 20);
-		contentPanel.add(comboBox);
+		estadoSelect = new JComboBox<Estado>();
+		estadoSelect.setModel(new EstadoComboBoxModel());
+		estadoSelect.setBounds(301, 99, 54, 20);
+		contentPanel.add(estadoSelect);
 		
 		JLabel lblEndereco = new JLabel("Endere\u00E7o:");
 		lblEndereco.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -142,35 +168,35 @@ public class AddPacienteDialog extends JDialog {
 		lblBairro.setBounds(190, 133, 32, 14);
 		contentPanel.add(lblBairro);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(232, 130, 123, 20);
-		contentPanel.add(textField_1);
-		textField_1.setColumns(10);
+		bairroField = new JTextField();
+		bairroField.setBounds(232, 130, 123, 20);
+		contentPanel.add(bairroField);
+		bairroField.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("E-mail:");
 		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEmail.setBounds(25, 164, 46, 14);
 		contentPanel.add(lblEmail);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(81, 161, 123, 20);
-		contentPanel.add(textField_2);
-		textField_2.setColumns(10);
+		emailField = new JTextField();
+		emailField.setBounds(81, 161, 123, 20);
+		contentPanel.add(emailField);
+		emailField.setColumns(10);
 		
 		JLabel lblTel = new JLabel("Tel.:");
 		lblTel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTel.setBounds(206, 164, 32, 14);
 		contentPanel.add(lblTel);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(239, 161, 116, 20);
-		contentPanel.add(textField_3);
-		textField_3.setColumns(10);
+		telefoneField = new JTextField();
+		telefoneField.setBounds(239, 161, 116, 20);
+		contentPanel.add(telefoneField);
+		telefoneField.setColumns(10);
 		
-		ScrollableTextArea scrollableTextArea = new ScrollableTextArea();
-		scrollableTextArea.setBorder(UIManager.getBorder("TextField.border"));
-		scrollableTextArea.setBounds(81, 192, 274, 81);
-		contentPanel.add(scrollableTextArea);
+		obsField = new ScrollableTextArea();
+		obsField.setBorder(UIManager.getBorder("TextField.border"));
+		obsField.setBounds(81, 192, 274, 81);
+		contentPanel.add(obsField);
 		
 		JLabel lblObs = new JLabel("Obs:");
 		lblObs.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -184,7 +210,11 @@ public class AddPacienteDialog extends JDialog {
 				JButton okButton = new JButton("Salvar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						doCadastrarPaciente();
+						try{
+							doCadastrarPaciente();
+						}catch(Exception e){
+							App.showMsgBox(owner,  e.getMessage());
+						}
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -194,7 +224,46 @@ public class AddPacienteDialog extends JDialog {
 		}
 	}
 	
-	public void doCadastrarPaciente(){
+	public AddPacienteDialog(Window owner, Paciente paciente) {
+		this(owner);
+		this.paciente = paciente;
+		setTitle("Editar Paciente");
+		pacienteField.setText(paciente.getNome());
+		generoSelect.setSelectedItem(paciente.getGenero());
+		datePicker.setSelectedDate(paciente.getDataNascimento());
+		cpfField.setText(paciente.getCpf());
+		rgField.setText(paciente.getRg());
+		enderecoField.setText(paciente.getEndereco());
+		cidadeField.setText(paciente.getCidade());
+		estadoSelect.setSelectedItem(paciente.getEstado());
+		telefoneField.setText(paciente.getTelefone());
+		emailField.setText(paciente.getEmail());
+		obsField.setText(paciente.getObservacao());
+		bairroField.setText(paciente.getBairro());
+	}
+	
+	public void doCadastrarPaciente() throws Exception{
+		if(pacienteField.getText().isEmpty() || rgField.getText().isEmpty())
+			throw new FormInvalidoException("Os campos obrigatórios não foram preenchidos.");
+		
+		if(!telefoneField.getText().isEmpty())
+			Validacao.validaTelefone(telefoneField.getText());
+		if(!emailField.getText().isEmpty())
+			Validacao.validaEmail(emailField.getText());
+		if(!cpfField.getText().isEmpty())
+			Validacao.validaCpf(cpfField.getText());
+		Validacao.validaRg(rgField.getText());
+	
+		
+		Paciente p = new Paciente(pacienteField.getText(), (Genero)generoSelect.getSelectedItem(), datePicker.getSelectedDate(), cpfField.getText(), rgField.getText(), enderecoField.getText(), 
+				cidadeField.getText(), (Estado)estadoSelect.getSelectedItem(), telefoneField.getText(), emailField.getText(), obsField.getText(), bairroField.getText());
+		if(this.paciente != null){
+			p.setID(this.paciente.getID());	
+		}
+		
+		
+		p.salvar(App.db);
+	
 		dispose();
 	}
 }

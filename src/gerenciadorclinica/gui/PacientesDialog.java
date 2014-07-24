@@ -1,13 +1,18 @@
 package gerenciadorclinica.gui;
 
+import gerenciadorclinica.App;
+import gerenciadorclinica.DB;
+import gerenciadorclinica.clinica.Paciente;
+
 import java.awt.Window;
 
 import javax.swing.JDialog;
 import javax.swing.JTable;
-
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 @SuppressWarnings("serial")
 public class PacientesDialog extends JDialog {
@@ -18,6 +23,7 @@ public class PacientesDialog extends JDialog {
 	 */
 	public static void showDialog(Window owner){
 		try {
+			
 			PacientesDialog dialog = new PacientesDialog(owner);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
@@ -88,6 +94,6 @@ public class PacientesDialog extends JDialog {
 	}
 	
 	public void showAddPaciente(){
-		AddPacienteDialog.showDialog(this);
+		AddPacienteDialog.showDialog(this, null);
 	}
 }

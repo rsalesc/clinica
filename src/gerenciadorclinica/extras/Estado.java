@@ -12,6 +12,13 @@ public class Estado {
 	}
 
 	@Override
+	public boolean equals(Object obj){
+		if(!(obj instanceof Estado)) return false;
+		if(obj == this) return true;
+		return (((Estado)obj).getSelecionado() == this.selecionado);
+	}
+	
+	@Override
 	public String toString() {
 		return Estado.UFpossiveis[selecionado];
 	}

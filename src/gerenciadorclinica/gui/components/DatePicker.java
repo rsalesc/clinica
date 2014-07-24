@@ -20,5 +20,9 @@ public class DatePicker extends JDatePickerImpl {
 	public Date getSelectedDate(){
 		return (Date)getModel().getValue();
 	}
+	
+	public void setSelectedDate(Date date){
+		((UtilDateModel)getModel()).setValue(date);
+	}
 
 }

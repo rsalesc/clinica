@@ -20,7 +20,7 @@ public class Validacao {
 	}
 	
 	public static void validaRg(String RG) throws RgInvalidoException {
-			if(RG.length() != 9)
+			if(RG.length() < 8 && RG.length() > 10)
 				throw new RgTamanhoInvalidoException();
 			try{
 				Long.parseLong(RG);

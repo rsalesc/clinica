@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Vector;
 
 public class Paciente extends Entrada implements IPersistente{
 	
@@ -233,6 +234,10 @@ public class Paciente extends Entrada implements IPersistente{
 		if(!rs.next())
 			throw new SQLException("[Erro ao carregar] Entrada não encontrada.");
 		
+		preenchePaciente(rs);		
+	}
+	
+	public void preenchePaciente(ResultSet rs) throws SQLException{
 		setDataCriacao(DB.unixToDate(rs.getLong("dataCriacao")));
 		this.nome = rs.getString("nome");
 		this.genero = new Genero(rs.getByte("genero"));
@@ -246,6 +251,19 @@ public class Paciente extends Entrada implements IPersistente{
 		this.cidade = rs.getString("cidade");
 		this.observacao = rs.getString("observacao");
 		this.bairro = rs.getString("bairro");
+	}
+	
+	public static Paciente[] listar(DB db) throws SQLException{
+		PreparedStatement stm = db.geraSelectStatement(Paciente.TABELA);
+		ResultSet rs = stm.executeQuery();
+		Vector<Paciente> pacientes = new Vector<Paciente>();
 		
+		while(rs.next()){
+			Paciente p = new Paciente(rs.getInt("id"));
+			p.preenchePaciente(rs);
+			pacientes.add(p);
+		}
+		
+		return (Paciente[])pacientes.toArray();
 	}
 }

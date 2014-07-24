@@ -10,9 +10,11 @@ import gerenciadorclinica.gui.JanelaPrincipal;
 import gerenciadorclinica.gui.LoginDialog;
 
 import java.awt.EventQueue;
+import java.awt.Window;
 import java.sql.SQLException;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class App {
@@ -29,6 +31,7 @@ public class App {
 				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					// DB TESTE
+					/*
 					{
 						DB data = db.clone();
 						Consulta c = new Consulta(1);
@@ -43,7 +46,8 @@ public class App {
 						} finally{
 							data.desconecta();
 						}
-					}
+					}*/
+					App.db.conecta();
 					JanelaPrincipal frame = new JanelaPrincipal();
 					frame.setVisible(true);
 					LoginDialog.showDialog(frame);
@@ -54,5 +58,7 @@ public class App {
 		});
 	}
 	
-	
+	public static void showMsgBox(Window owner, String msg){
+		JOptionPane.showMessageDialog(owner, msg);
+	}
 }
